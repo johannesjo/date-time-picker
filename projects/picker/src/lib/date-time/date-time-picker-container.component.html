@@ -2,6 +2,26 @@
      [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
      class="owl-dt-container-inner">
 
+    <div class="owl-dt-schedule"
+         *ngIf="picker.scheduleItem1">
+      <div class="owl-dt-schedule-item"
+           *ngIf="picker.scheduleItem1"
+           [innerHTML]="picker.scheduleItem1"
+           (click)="picker.onClickScheduleItem(1)"></div>
+      <div class="owl-dt-schedule-item"
+           *ngIf="picker.scheduleItem2"
+           [innerHTML]="picker.scheduleItem2"
+           (click)="picker.onClickScheduleItem(2)"></div>
+      <div class="owl-dt-schedule-item"
+           *ngIf="picker.scheduleItem3"
+           [innerHTML]="picker.scheduleItem3"
+           (click)="picker.onClickScheduleItem(3)"></div>
+      <div class="owl-dt-schedule-item"
+           *ngIf="picker.scheduleItem4"
+           [innerHTML]="picker.scheduleItem4"
+           (click)="picker.onClickScheduleItem(4)"></div>
+    </div>
+
     <owl-date-time-calendar
             *ngIf="pickerType === 'both' || pickerType === 'calendar'"
             class="owl-dt-container-row"

@@ -35,4 +35,8 @@ export class AppComponent implements AfterViewInit {
       this.inputRef.nativeElement.click();
     }, 100);
   }
+
+  clickSchedule(i) {
+    console.log(i);
+  }
 }

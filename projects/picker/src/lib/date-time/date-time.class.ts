@@ -1,16 +1,10 @@
 /**
  * date-time.class
  */
-import { EventEmitter, Inject, Input, Optional, Directive } from '@angular/core';
-import {
-    coerceBooleanProperty,
-    coerceNumberProperty
-} from '@angular/cdk/coercion';
+import { Directive, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
-import {
-    OWL_DATE_TIME_FORMATS,
-    OwlDateTimeFormats
-} from './adapter/date-time-format.class';
+import { OWL_DATE_TIME_FORMATS, OwlDateTimeFormats } from './adapter/date-time-format.class';
 
 let nextUniqueId = 0;
 
@@ -53,6 +47,17 @@ export abstract class OwlDateTime<T> {
      */
     @Input()
     startView: 'month' | 'year' | 'multi-years' = 'month';
+
+    @Input()
+    scheduleItem1: string;
+    @Input()
+    scheduleItem2: string;
+    @Input()
+    scheduleItem3: string;
+    @Input()
+    scheduleItem4: string;
+    @Output()
+    scheduleItemClick = new EventEmitter<number>();
 
     /**
      * Hours to change per step
@@ -190,6 +195,10 @@ export abstract class OwlDateTime<T> {
 
     get disabled(): boolean {
         return false;
+    }
+
+    onClickScheduleItem(i: number) {
+      this.scheduleItemClick.emit(i);
     }
 
     protected constructor(

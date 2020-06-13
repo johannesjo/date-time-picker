@@ -6,9 +6,15 @@
        matInput>
 
 <owl-date-time #date_range_component
-               [pickerMode]="'inline'"
-               [startAt]="currentValue">
-    <h1 (click)="date_range_component.close()">Header</h1>
-    <h1>Header1</h1>
-    <h1>Header2</h1>
+               [pickerMode]="'popup'"
+               [startAt]="currentValue"
+               [scheduleItem1]="'<div>Today</div>'"
+               [scheduleItem2]="'Tomorrow'"
+               [scheduleItem3]="'Next Week'"
+               [scheduleItem4]="'Close'"
+               (scheduleItemClick)="clickSchedule($event)"
+>
+  <h1 (click)="date_range_component.close()">Header</h1>
+  <h1>Header1</h1>
+  <h1>Header2</h1>
 </owl-date-time>
