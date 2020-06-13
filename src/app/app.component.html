@@ -2,5 +2,13 @@
 <input [(ngModel)]="selectedMoments" [selectMode]="'range'"
        [owlDateTimeTrigger]="date_range_component" [owlDateTime]="date_range_component"
        style="width: 100%; color: cornflowerblue"
-       id="daterange" matInput>
-<owl-date-time #date_range_component [startAt]="currentValue" [endAt]="endValue"></owl-date-time>
+       id="daterange"
+       matInput>
+
+<owl-date-time #date_range_component
+               [pickerMode]="'inline'"
+               [startAt]="currentValue">
+    <h1 (click)="date_range_component.close()">Header</h1>
+    <h1>Header1</h1>
+    <h1>Header2</h1>
+</owl-date-time>
