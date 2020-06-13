@@ -1,30 +1,21 @@
-Angular Date Time Picker
-========================
+Angular Date Time Picker Schedule
+================================
 
-[![npm](https://img.shields.io/npm/v/@danielmoncada/angular-datetime-picker.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/@danielmoncada/angular-datetime-picker)
-[![npm](https://img.shields.io/npm/dm/@danielmoncada/angular-datetime-picker.svg)](https://www.npmjs.com/package/@danielmoncada/angular-datetime-picker)
+[![npm](https://img.shields.io/npm/v/johannesjo/ngx-date-time-picker-schedule.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/johannesjo/ngx-date-time-picker-schedule)
+[![npm](https://img.shields.io/npm/dm/johannesjo/ngx-date-time-picker-schedule.svg)](https://www.npmjs.com/package/johannesjo/ngx-date-time-picker-schedule)
 
 **Angular date time picker - Angular reusable UI component**
 **This package supports Angular 9+**
 
-Breaking Changes
--------
- - The date/time picker has been updated to support Angular 9, as well as compilation using Ivy.
- - If you need Ng8 support, please stick with: https://github.com/DanielYKPan/date-time-picker
-
-Description
--------
-Simple Angular date time picker. Online doc is [here](https://daniel-projects.firebaseapp.com/owlng/date-time-picker), Online demos(StackBlitz) are [here](https://stackblitz.com/edit/angular-vvp849) and [here](https://stackblitz.com/edit/angular-i7ykf5).
-This picker is responsive design, so feel free to try it in your desktops, tablets and mobile devices. 
 
 How to Use
 -------
 
- 1. Install with [npm](https://www.npmjs.com):`npm install @danielmoncada/angular-datetime-picker --save`
+ 1. Install with [npm](https://www.npmjs.com):`npm install ngx-date-time-picker-schedule --save`
  2. Add styles.
     If you are using Angular CLI, you can add this to your styles.css: 
     ```css
-    @import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+    @import "~ngx-date-time-picker-schedule/assets/style/picker.min.css";
     ``` 
     If you are not using the Angular CLI, you can include the picker.min.css via a ```<link>``` element in your index.html.
  3. Add __OwlDateTimeModule__ and __OwlNativeDateTimeModule__ to your __@NgModule__ like example below
@@ -33,7 +24,7 @@ How to Use
      import { BrowserModule } from '@angular/platform-browser';
      import { MyTestApp } from './my-test-app';
     
-     import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+     import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ngx-date-time-picker-schedule';
     
      @NgModule({
          imports: [ 
@@ -87,7 +78,6 @@ Choose a date implementation
 -------
 The date-time picker was built to be date implementation agnostic. 
 Developers need to make sure to provide the appropriate pieces for the picker to work with their chosen implementation.
-There are two pre-made modules, users need to import one of them or build your own one (learn more about this from [here](https://danielykpan.github.io/date-time-picker/#locale-formats)).
 
 - `OwlNativeDateTimeModule` - support for native JavaScript Date object
 - `OwlMomentDateTimeModule` - support for MomentJs
@@ -187,15 +177,7 @@ Dependencies
 -------
 none
 
-Demo
--------
-- Online doc is [here](https://daniel-projects.firebaseapp.com/owlng/date-time-picker)
-- Online demos (StackBlitz) are [here](https://stackblitz.com/edit/angular-vvp849) and [here](https://stackblitz.com/edit/angular-i7ykf5)
 
 License
 -------
 * License: MIT
-
-Author
--------
-**Maintained and updated by Daniel Moncada, original implementatiom by Daniel Pan**
