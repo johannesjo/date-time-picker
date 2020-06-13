@@ -1,7 +1,7 @@
 {
-  "name": "@danielmoncada/angular-datetime-picker",
+  "name": "ngx-date-time-picker-schedule",
   "version": "9.4.0",
-  "description": "Angular Date Time Picker",
+  "description": "Angular Date Time Picker Schedule",
   "keywords": [
     "Angular",
     "datepicker",
@@ -13,13 +13,13 @@
     "material",
     "ngx"
   ],
-  "author": "Maintained and updated by Daniel Moncada, original implementatiom by Daniel Pan",
+    "author": "Johannes Millam, using the fork of Daniel Moncada, original implementatiom by Daniel Pan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/danielmoncada/date-time-picker.git"
+    "url": "https://github.com/johannesjo/ngx-date-time-picker-schedule"
   },
-  "homepage": "https://github.com/danielmoncada/date-time-picker",
+  "homepage": "https://github.com/johannesjo/ngx-date-time-picker-schedule",
   "publishConfig": {
     "access": "public"
   },
