@@ -3,10 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from '../../projects/picker/src/public_api';
+import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '../../projects/picker/src/public_api';
 
 import { AppComponent } from './app.component';
-import { OWL_DATE_TIME_LOCALE } from '../../projects/picker/src/public_api';
 
 
 @NgModule({
@@ -18,8 +17,9 @@ import { OWL_DATE_TIME_LOCALE } from '../../projects/picker/src/public_api';
     OwlDateTimeModule, OwlNativeDateTimeModule
   ],
   providers: [
-   { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-US' }
+    { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-US' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

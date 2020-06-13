@@ -3,16 +3,17 @@
        [owlDateTimeTrigger]="date_range_component" [owlDateTime]="date_range_component"
        style="width: 100%; color: cornflowerblue"
        id="daterange"
-       matInput>
+       matInput
+       style="width: 100%; color: cornflowerblue">
 
 <owl-date-time #date_range_component
+               (scheduleItemClick)="clickSchedule($event)"
                [pickerMode]="'popup'"
-               [startAt]="currentValue"
                [scheduleItem1]="'<div>Today</div>'"
                [scheduleItem2]="'Tomorrow'"
                [scheduleItem3]="'Next Week'"
                [scheduleItem4]="'Close'"
-               (scheduleItemClick)="clickSchedule($event)"
+               [startAt]="currentValue"
 >
   <h1 (click)="date_range_component.close()">Header</h1>
   <h1>Header1</h1>

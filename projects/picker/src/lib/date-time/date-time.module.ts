@@ -23,40 +23,40 @@ import { OwlDateTimeInlineComponent } from './date-time-inline.component';
 import { OwlDialogModule } from '../dialog/dialog.module';
 
 @NgModule({
-    imports: [CommonModule, OverlayModule, OwlDialogModule, A11yModule],
-    exports: [
-        OwlCalendarComponent,
-        OwlTimerComponent,
-        OwlDateTimeTriggerDirective,
-        OwlDateTimeInputDirective,
-        OwlDateTimeComponent,
-        OwlDateTimeInlineComponent,
-        OwlMultiYearViewComponent,
-        OwlYearViewComponent,
-        OwlMonthViewComponent,
-    ],
-    declarations: [
-        OwlDateTimeTriggerDirective,
-        OwlDateTimeInputDirective,
-        OwlDateTimeComponent,
-        OwlDateTimeContainerComponent,
-        OwlMultiYearViewComponent,
-        OwlYearViewComponent,
-        OwlMonthViewComponent,
-        OwlTimerComponent,
-        OwlTimerBoxComponent,
-        OwlCalendarComponent,
-        OwlCalendarBodyComponent,
-        NumberFixedLenPipe,
-        OwlDateTimeInlineComponent,
-    ],
-    providers: [
-        OwlDateTimeIntl,
-        OWL_DTPICKER_SCROLL_STRATEGY_PROVIDER,
-    ],
-    entryComponents: [
-        OwlDateTimeContainerComponent,
-    ]
+  imports: [CommonModule, OverlayModule, OwlDialogModule, A11yModule],
+  exports: [
+    OwlCalendarComponent,
+    OwlTimerComponent,
+    OwlDateTimeTriggerDirective,
+    OwlDateTimeInputDirective,
+    OwlDateTimeComponent,
+    OwlDateTimeInlineComponent,
+    OwlMultiYearViewComponent,
+    OwlYearViewComponent,
+    OwlMonthViewComponent
+  ],
+  declarations: [
+    OwlDateTimeTriggerDirective,
+    OwlDateTimeInputDirective,
+    OwlDateTimeComponent,
+    OwlDateTimeContainerComponent,
+    OwlMultiYearViewComponent,
+    OwlYearViewComponent,
+    OwlMonthViewComponent,
+    OwlTimerComponent,
+    OwlTimerBoxComponent,
+    OwlCalendarComponent,
+    OwlCalendarBodyComponent,
+    NumberFixedLenPipe,
+    OwlDateTimeInlineComponent
+  ],
+  providers: [
+    OwlDateTimeIntl,
+    OWL_DTPICKER_SCROLL_STRATEGY_PROVIDER
+  ],
+  entryComponents: [
+    OwlDateTimeContainerComponent
+  ]
 })
 export class OwlDateTimeModule {
 }

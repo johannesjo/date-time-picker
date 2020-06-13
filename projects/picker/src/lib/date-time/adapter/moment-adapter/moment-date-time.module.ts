@@ -9,20 +9,20 @@ import { DateTimeAdapter, OWL_DATE_TIME_LOCALE } from '../date-time-adapter.clas
 import { OWL_DATE_TIME_FORMATS } from '../date-time-format.class';
 
 @NgModule({
-    providers: [
-        {
-            provide: DateTimeAdapter,
-            useClass: MomentDateTimeAdapter,
-            deps: [OWL_DATE_TIME_LOCALE, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS]
-        },
-    ],
+  providers: [
+    {
+      provide: DateTimeAdapter,
+      useClass: MomentDateTimeAdapter,
+      deps: [OWL_DATE_TIME_LOCALE, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS]
+    }
+  ]
 })
 export class MomentDateTimeModule {
 }
 
 @NgModule({
-    imports: [MomentDateTimeModule],
-    providers: [{provide: OWL_DATE_TIME_FORMATS, useValue: OWL_MOMENT_DATE_TIME_FORMATS}],
+  imports: [MomentDateTimeModule],
+  providers: [{ provide: OWL_DATE_TIME_FORMATS, useValue: OWL_MOMENT_DATE_TIME_FORMATS }]
 })
 export class OwlMomentDateTimeModule {
 }

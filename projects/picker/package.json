@@ -13,7 +13,7 @@
     "material",
     "ngx"
   ],
-    "author": "Johannes Millam, using the fork of Daniel Moncada, original implementatiom by Daniel Pan",
+  "author": "Johannes Millam, using the fork of Daniel Moncada, original implementatiom by Daniel Pan",
   "license": "MIT",
   "repository": {
     "type": "git",

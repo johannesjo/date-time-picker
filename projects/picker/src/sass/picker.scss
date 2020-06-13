@@ -121,7 +121,7 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
   // when using the "grow after open" options.
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
 
   // Add some dimensions so the element has an `innerText` which some people depend on in tests.
   min-width: 1px;
@@ -189,7 +189,7 @@ $theme-color: #3f51b5;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -197,7 +197,7 @@ $theme-color: #3f51b5;
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
   font-size: 1em;
   width: 100%;
   padding: .5em;
@@ -205,13 +205,13 @@ $theme-color: #3f51b5;
 
   .owl-dt-calendar-control-content {
     -webkit-box-flex: 1;
-            flex: 1 1 auto;
+    flex: 1 1 auto;
     display: -webkit-box;
     display: flex;
     -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
 
     .owl-dt-calendar-control-button {
       padding: 0 .8em;
@@ -228,9 +228,9 @@ $theme-color: #3f51b5;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
   -webkit-box-flex: 1;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
   padding: 0 .5em .5em;
   outline: 0;
 }
@@ -238,14 +238,14 @@ $theme-color: #3f51b5;
 .owl-dt-calendar-view {
   display: block;
   -webkit-box-flex: 1;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .owl-dt-calendar-multi-year-view {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 
   .owl-dt-calendar-table {
     width: calc(100% - 3em);
@@ -309,9 +309,9 @@ $theme-color: #3f51b5;
     display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
     -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     box-sizing: border-box;
     width: 90%;
     height: 90%;
@@ -380,7 +380,7 @@ $theme-color: #3f51b5;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
   width: 100%;
   height: 7em;
   padding: .5em;
@@ -393,22 +393,22 @@ $theme-color: #3f51b5;
   display: inline-flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
   width: 25%;
   height: 100%;
 }
 
 .owl-dt-timer-content {
   -webkit-box-flex: 1;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
   -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
   width: 100%;
   margin: .2em 0;
 
@@ -421,7 +421,8 @@ $theme-color: #3f51b5;
     outline: medium none;
     font-size: 1.2em;
     padding: .2em;
-  }}
+  }
+}
 
 
 .owl-dt-timer-divider {
@@ -442,7 +443,7 @@ $theme-color: #3f51b5;
     left: 50%;
     border-radius: 50%;
     -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
     background-color: currentColor;
   }
 
@@ -457,9 +458,9 @@ $theme-color: #3f51b5;
 
 .owl-dt-control-button {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   cursor: pointer;
   outline: none;
   border: none;
@@ -479,9 +480,9 @@ $theme-color: #3f51b5;
     display: -webkit-inline-box;
     display: inline-flex;
     -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
     outline: none;
   }
 }
@@ -503,9 +504,9 @@ $theme-color: #3f51b5;
     display: -webkit-box;
     display: flex;
     -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
     width: 1em;
     height: 1em;
     margin: .1em;
@@ -637,7 +638,7 @@ $theme-color: #3f51b5;
       display: -webkit-box;
       display: flex;
       -webkit-box-pack: justify;
-              justify-content: space-between;
+      justify-content: space-between;
       padding: .5em 0;
       font-size: .8em;
     }
@@ -664,9 +665,9 @@ $theme-color: #3f51b5;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
   -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
   color: $theme-color;
 
   .owl-dt-timer-hour12-box {

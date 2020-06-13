@@ -11,7 +11,7 @@ export { OwlNativeDateTimeModule } from './lib/date-time/adapter/native-date-tim
 export {
   OWL_DATE_TIME_LOCALE_PROVIDER,
   OWL_DATE_TIME_LOCALE,
-  DateTimeAdapter,
+  DateTimeAdapter
 
 } from './lib/date-time/adapter/date-time-adapter.class';
 

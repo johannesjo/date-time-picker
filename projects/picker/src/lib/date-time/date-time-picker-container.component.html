@@ -1,98 +1,109 @@
-<div [cdkTrapFocus]="picker.pickerMode !== 'inline'"
-     [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
+<div [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
+     [cdkTrapFocus]="picker.pickerMode !== 'inline'"
      class="owl-dt-container-inner">
 
-    <div class="owl-dt-schedule"
-         *ngIf="picker.scheduleItem1">
-      <div class="owl-dt-schedule-item"
-           *ngIf="picker.scheduleItem1"
-           [innerHTML]="picker.scheduleItem1"
-           (click)="picker.onClickScheduleItem(1)"></div>
-      <div class="owl-dt-schedule-item"
-           *ngIf="picker.scheduleItem2"
-           [innerHTML]="picker.scheduleItem2"
-           (click)="picker.onClickScheduleItem(2)"></div>
-      <div class="owl-dt-schedule-item"
-           *ngIf="picker.scheduleItem3"
-           [innerHTML]="picker.scheduleItem3"
-           (click)="picker.onClickScheduleItem(3)"></div>
-      <div class="owl-dt-schedule-item"
-           *ngIf="picker.scheduleItem4"
-           [innerHTML]="picker.scheduleItem4"
-           (click)="picker.onClickScheduleItem(4)"></div>
-    </div>
+  <div *ngIf="picker.scheduleItem1"
+       class="owl-dt-schedule">
+    <div (click)="picker.onClickScheduleItem(1)"
+         *ngIf="picker.scheduleItem1"
+         [innerHTML]="picker.scheduleItem1"
+         class="owl-dt-schedule-item"></div>
+    <div (click)="picker.onClickScheduleItem(2)"
+         *ngIf="picker.scheduleItem2"
+         [innerHTML]="picker.scheduleItem2"
+         class="owl-dt-schedule-item"></div>
+    <div (click)="picker.onClickScheduleItem(3)"
+         *ngIf="picker.scheduleItem3"
+         [innerHTML]="picker.scheduleItem3"
+         class="owl-dt-schedule-item"></div>
+    <div (click)="picker.onClickScheduleItem(4)"
+         *ngIf="picker.scheduleItem4"
+         [innerHTML]="picker.scheduleItem4"
+         class="owl-dt-schedule-item"></div>
+  </div>
 
-    <owl-date-time-calendar
-            *ngIf="pickerType === 'both' || pickerType === 'calendar'"
-            class="owl-dt-container-row"
-            [firstDayOfWeek]="picker.firstDayOfWeek"
-            [(pickerMoment)]="pickerMoment"
-            [selected]="picker.selected"
-            [selecteds]="picker.selecteds"
-            [selectMode]="picker.selectMode"
-            [minDate]="picker.minDateTime"
-            [maxDate]="picker.maxDateTime"
-            [dateFilter]="picker.dateTimeFilter"
-            [startView]="picker.startView"
-            [hideOtherMonths]="picker.hideOtherMonths"
-            (yearSelected)="picker.selectYear($event)"
-            (monthSelected)="picker.selectMonth($event)"
-            (selectedChange)="dateSelected($event)"></owl-date-time-calendar>
+  <owl-date-time-calendar
+    (monthSelected)="picker.selectMonth($event)"
+    (selectedChange)="dateSelected($event)"
+    (yearSelected)="picker.selectYear($event)"
+    *ngIf="pickerType === 'both' || pickerType === 'calendar'"
+    [(pickerMoment)]="pickerMoment"
+    [dateFilter]="picker.dateTimeFilter"
+    [firstDayOfWeek]="picker.firstDayOfWeek"
+    [hideOtherMonths]="picker.hideOtherMonths"
+    [maxDate]="picker.maxDateTime"
+    [minDate]="picker.minDateTime"
+    [selectMode]="picker.selectMode"
+    [selected]="picker.selected"
+    [selecteds]="picker.selecteds"
+    [startView]="picker.startView"
+    class="owl-dt-container-row"></owl-date-time-calendar>
 
-    <owl-date-time-timer
-            *ngIf="pickerType === 'both' || pickerType === 'timer'"
-            class="owl-dt-container-row"
-            [pickerMoment]="pickerMoment"
-            [minDateTime]="picker.minDateTime"
-            [maxDateTime]="picker.maxDateTime"
-            [showSecondsTimer]="picker.showSecondsTimer"
-            [hour12Timer]="picker.hour12Timer"
-            [stepHour]="picker.stepHour"
-            [stepMinute]="picker.stepMinute"
-            [stepSecond]="picker.stepSecond"
-            (selectedChange)="timeSelected($event)"></owl-date-time-timer>
+  <owl-date-time-timer
+    (selectedChange)="timeSelected($event)"
+    *ngIf="pickerType === 'both' || pickerType === 'timer'"
+    [hour12Timer]="picker.hour12Timer"
+    [maxDateTime]="picker.maxDateTime"
+    [minDateTime]="picker.minDateTime"
+    [pickerMoment]="pickerMoment"
+    [showSecondsTimer]="picker.showSecondsTimer"
+    [stepHour]="picker.stepHour"
+    [stepMinute]="picker.stepMinute"
+    [stepSecond]="picker.stepSecond"
+    class="owl-dt-container-row"></owl-date-time-timer>
 
-    <div *ngIf="picker.isInRangeMode"
-         role="radiogroup"
-         class="owl-dt-container-info owl-dt-container-row">
-        <div role="radio" [tabindex]="activeSelectedIndex === 0 ? 0 : -1"
-             [attr.aria-checked]="activeSelectedIndex === 0"
-             class="owl-dt-control owl-dt-container-range owl-dt-container-from"
-             [ngClass]="{'owl-dt-container-info-active': activeSelectedIndex === 0}"
-             (click)="handleClickOnInfoGroup($event, 0)"
-             (keydown)="handleKeydownOnInfoGroup($event, to, 0)" #from>
-            <span class="owl-dt-control-content owl-dt-container-range-content" tabindex="-1">
+  <div *ngIf="picker.isInRangeMode"
+       class="owl-dt-container-info owl-dt-container-row"
+       role="radiogroup">
+    <div #from
+         (click)="handleClickOnInfoGroup($event, 0)"
+         (keydown)="handleKeydownOnInfoGroup($event, to, 0)"
+         [attr.aria-checked]="activeSelectedIndex === 0"
+         [ngClass]="{'owl-dt-container-info-active': activeSelectedIndex === 0}"
+         [tabindex]="activeSelectedIndex === 0 ? 0 : -1"
+         class="owl-dt-control owl-dt-container-range owl-dt-container-from"
+         role="radio">
+            <span class="owl-dt-control-content owl-dt-container-range-content"
+                  tabindex="-1">
                 <span class="owl-dt-container-info-label">{{fromLabel}}:</span>
                 <span class="owl-dt-container-info-value">{{fromFormattedValue}}</span>
             </span>
-        </div>
-        <div role="radio" [tabindex]="activeSelectedIndex === 1 ? 0 : -1"
-             [attr.aria-checked]="activeSelectedIndex === 1"
-             class="owl-dt-control owl-dt-container-range owl-dt-container-to"
-             [ngClass]="{'owl-dt-container-info-active': activeSelectedIndex === 1}"
-             (click)="handleClickOnInfoGroup($event, 1)"
-             (keydown)="handleKeydownOnInfoGroup($event, from, 1)" #to>
-            <span class="owl-dt-control-content owl-dt-container-range-content" tabindex="-1">
+    </div>
+    <div #to
+         (click)="handleClickOnInfoGroup($event, 1)"
+         (keydown)="handleKeydownOnInfoGroup($event, from, 1)"
+         [attr.aria-checked]="activeSelectedIndex === 1"
+         [ngClass]="{'owl-dt-container-info-active': activeSelectedIndex === 1}"
+         [tabindex]="activeSelectedIndex === 1 ? 0 : -1"
+         class="owl-dt-control owl-dt-container-range owl-dt-container-to"
+         role="radio">
+            <span class="owl-dt-control-content owl-dt-container-range-content"
+                  tabindex="-1">
                 <span class="owl-dt-container-info-label">{{toLabel}}:</span>
                 <span class="owl-dt-container-info-value">{{toFormattedValue}}</span>
             </span>
-        </div>
     </div>
+  </div>
 
-    <div *ngIf="showControlButtons" class="owl-dt-container-buttons owl-dt-container-row">
-        <button class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
-                type="button" tabindex="0"
-                (click)="onCancelClicked($event)">
-            <span class="owl-dt-control-content owl-dt-control-button-content" tabindex="-1">
+  <div *ngIf="showControlButtons"
+       class="owl-dt-container-buttons owl-dt-container-row">
+    <button (click)="onCancelClicked($event)"
+            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
+            tabindex="0"
+            type="button">
+            <span class="owl-dt-control-content owl-dt-control-button-content"
+                  tabindex="-1">
                 {{cancelLabel}}
             </span>
-        </button>
-        <button class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
-                type="button" tabindex="0"
-                (click)="onSetClicked($event)">
-            <span class="owl-dt-control-content owl-dt-control-button-content" tabindex="-1">
+    </button>
+    <button (click)="onSetClicked($event)"
+            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
+            tabindex="0"
+            type="button">
+            <span class="owl-dt-control-content owl-dt-control-button-content"
+                  tabindex="-1">
                 {{setLabel}}
             </span>
-        </button>
-    </div>
+    </button>
+  </div>
 </div>
