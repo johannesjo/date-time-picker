@@ -38,6 +38,8 @@ import { Subscription } from 'rxjs';
 })
 export class OwlCalendarComponent<T>
   implements OnInit, AfterContentInit, AfterViewChecked, OnDestroy {
+  @Input()
+  isNoMonthSquares: boolean;
   /**
    * Date filter for the month and year view
    * */

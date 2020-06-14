@@ -57,6 +57,7 @@
     (selectedChange)="dateSelected($event)"
     (yearSelected)="picker.selectYear($event)"
     *ngIf="pickerType === 'both' || pickerType === 'calendar'"
+    [isNoMonthSquares]="picker.isNoMonthSquares"
     [(pickerMoment)]="pickerMoment"
     [dateFilter]="picker.dateTimeFilter"
     [firstDayOfWeek]="picker.firstDayOfWeek"

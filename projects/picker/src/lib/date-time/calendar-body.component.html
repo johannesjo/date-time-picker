@@ -10,7 +10,7 @@
       [class.owl-dt-calendar-cell-range-from]="isRangeFrom(item.value)"
       [class.owl-dt-calendar-cell-range-to]="isRangeTo(item.value)"
       [style.paddingBottom.%]="50 * cellRatio / numCols"
-      [style.paddingTop.%]="50 * cellRatio / numCols"
+      [style.paddingTop.%]="isNoMonthSquares ? null: (50 * cellRatio / numCols)"
       [style.width.%]="100 / numCols"
       [tabindex]="isActiveCell(rowIndex, colIndex) ? 0 : -1"
       class="owl-dt-calendar-cell {{item.cellClass}}">

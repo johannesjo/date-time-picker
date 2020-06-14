@@ -30,6 +30,9 @@ export class CalendarCell {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OwlCalendarBodyComponent implements OnInit {
+  @Input()
+  isNoMonthSquares: boolean;
+
   /**
    * The cell number of the active cell in the table.
    */

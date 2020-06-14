@@ -40,6 +40,9 @@ const WEEKS_PER_VIEW = 6;
 })
 export class OwlMonthViewComponent<T>
   implements OnInit, AfterContentInit, OnDestroy {
+  @Input()
+  isNoMonthSquares: boolean;
+
   /**
    * Whether to hide dates in other months at the start or end of the current month.
    * */

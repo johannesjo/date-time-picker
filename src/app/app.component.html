@@ -1,15 +1,19 @@
-<owl-date-time-inline [value]="currentValue"></owl-date-time-inline>
+<owl-date-time-inline [value]="currentValue"
+                      [isNoMonthSquares]="true"></owl-date-time-inline>
 
 
 <label for="daterange">Datetime range (click, then press 'Set' to modify):</label>
-<input [(ngModel)]="selectedMoments" [selectMode]="'range'"
-       [owlDateTimeTrigger]="date_range_component" [owlDateTime]="date_range_component"
+<input [(ngModel)]="selectedMoments"
+       [selectMode]="'range'"
+       [owlDateTimeTrigger]="date_range_component"
+       [owlDateTime]="date_range_component"
        style="width: 100%; color: cornflowerblue"
        id="daterange"
        matInput
        style="width: 100%; color: cornflowerblue">
 
 <owl-date-time #date_range_component
+               [isNoMonthSquares]="true"
                (change)="clickSchedule($event)"
                [pickerMode]="'popup'"
                [startAt]="currentValue"

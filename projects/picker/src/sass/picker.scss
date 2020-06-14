@@ -300,6 +300,7 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     outline: 0;
     color: rgba(0, 0, 0, .85);
     -webkit-appearance: none;
+    padding-top: 12px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
   }
@@ -555,6 +556,13 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     height: 20.25em;
   }
 }
+
+.owl-dt-inline-container {
+  .owl-dt-calendar {
+    height: auto;
+  }
+}
+
 
 .owl-dt-dialog-container {
   max-height: 95vh;

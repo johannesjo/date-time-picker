@@ -16,6 +16,9 @@ export type SelectMode = 'single' | 'range' | 'rangeFrom' | 'rangeTo';
 
 @Directive()
 export abstract class OwlDateTime<T> {
+  @Input()
+  isNoMonthSquares: boolean;
+
   /**
    * The view that the calendar should start in.
    */
