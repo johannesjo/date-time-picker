@@ -9,10 +9,6 @@
 <owl-date-time #date_range_component
                (scheduleItemClick)="clickSchedule($event)"
                [pickerMode]="'popup'"
-               [scheduleItem1]="'<div>Today</div>'"
-               [scheduleItem2]="'Tomorrow'"
-               [scheduleItem3]="'Next Week'"
-               [scheduleItem4]="'Close'"
                [startAt]="currentValue"
 >
   <h1 (click)="date_range_component.close()">Header</h1>

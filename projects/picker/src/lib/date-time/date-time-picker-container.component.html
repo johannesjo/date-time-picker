@@ -2,24 +2,38 @@
      [cdkTrapFocus]="picker.pickerMode !== 'inline'"
      class="owl-dt-container-inner">
 
-  <div *ngIf="picker.scheduleItem1"
-       class="owl-dt-schedule">
-    <div (click)="picker.onClickScheduleItem(1)"
-         *ngIf="picker.scheduleItem1"
-         [innerHTML]="picker.scheduleItem1"
-         class="owl-dt-schedule-item"></div>
-    <div (click)="picker.onClickScheduleItem(2)"
-         *ngIf="picker.scheduleItem2"
-         [innerHTML]="picker.scheduleItem2"
-         class="owl-dt-schedule-item"></div>
-    <div (click)="picker.onClickScheduleItem(3)"
-         *ngIf="picker.scheduleItem3"
-         [innerHTML]="picker.scheduleItem3"
-         class="owl-dt-schedule-item"></div>
-    <div (click)="picker.onClickScheduleItem(4)"
-         *ngIf="picker.scheduleItem4"
-         [innerHTML]="picker.scheduleItem4"
-         class="owl-dt-schedule-item"></div>
+  <div class="owl-top-input">
+    <input type="text">
+  </div>
+
+  <div class="owl-header-wrapper">
+    <div class="owl-dt-schedule">
+      <div class="owl-dt-schedule-item">
+        <div class="owl-schedule-item--title">Today</div>
+      </div>
+      <div class="owl-dt-schedule-item">
+        <div class="owl-schedule-item--title">Tomorrow</div>
+      </div>
+      <div class="owl-dt-schedule-item">
+        <div class="owl-schedule-item--title">Next week</div>
+      </div>
+      <div class="owl-dt-schedule-item">
+        <div class="owl-schedule-item--title">No Date</div>
+      </div>
+    </div>
+
+    <owl-date-time-timer
+      (selectedChange)="timeSelected($event)"
+      *ngIf="pickerType === 'both' || pickerType === 'timer'"
+      [hour12Timer]="picker.hour12Timer"
+      [maxDateTime]="picker.maxDateTime"
+      [minDateTime]="picker.minDateTime"
+      [pickerMoment]="pickerMoment"
+      [showSecondsTimer]="picker.showSecondsTimer"
+      [stepHour]="picker.stepHour"
+      [stepMinute]="picker.stepMinute"
+      [stepSecond]="picker.stepSecond"
+      class="owl-dt-container-row"></owl-date-time-timer>
   </div>
 
   <owl-date-time-calendar
@@ -38,19 +52,6 @@
     [selecteds]="picker.selecteds"
     [startView]="picker.startView"
     class="owl-dt-container-row"></owl-date-time-calendar>
-
-  <owl-date-time-timer
-    (selectedChange)="timeSelected($event)"
-    *ngIf="pickerType === 'both' || pickerType === 'timer'"
-    [hour12Timer]="picker.hour12Timer"
-    [maxDateTime]="picker.maxDateTime"
-    [minDateTime]="picker.minDateTime"
-    [pickerMoment]="pickerMoment"
-    [showSecondsTimer]="picker.showSecondsTimer"
-    [stepHour]="picker.stepHour"
-    [stepMinute]="picker.stepMinute"
-    [stepSecond]="picker.stepSecond"
-    class="owl-dt-container-row"></owl-date-time-timer>
 
   <div *ngIf="picker.isInRangeMode"
        class="owl-dt-container-info owl-dt-container-row"
@@ -85,25 +86,25 @@
     </div>
   </div>
 
-  <div *ngIf="showControlButtons"
-       class="owl-dt-container-buttons owl-dt-container-row">
-    <button (click)="onCancelClicked($event)"
-            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
-            tabindex="0"
-            type="button">
-            <span class="owl-dt-control-content owl-dt-control-button-content"
-                  tabindex="-1">
-                {{cancelLabel}}
-            </span>
-    </button>
-    <button (click)="onSetClicked($event)"
-            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"
-            tabindex="0"
-            type="button">
-            <span class="owl-dt-control-content owl-dt-control-button-content"
-                  tabindex="-1">
-                {{setLabel}}
-            </span>
-    </button>
-  </div>
+  <!--  <div *ngIf="showControlButtons"-->
+  <!--       class="owl-dt-container-buttons owl-dt-container-row">-->
+  <!--    <button (click)="onCancelClicked($event)"-->
+  <!--            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"-->
+  <!--            tabindex="0"-->
+  <!--            type="button">-->
+  <!--            <span class="owl-dt-control-content owl-dt-control-button-content"-->
+  <!--                  tabindex="-1">-->
+  <!--                {{cancelLabel}}-->
+  <!--            </span>-->
+  <!--    </button>-->
+  <!--    <button (click)="onSetClicked($event)"-->
+  <!--            class="owl-dt-control owl-dt-control-button owl-dt-container-control-button"-->
+  <!--            tabindex="0"-->
+  <!--            type="button">-->
+  <!--            <span class="owl-dt-control-content owl-dt-control-button-content"-->
+  <!--                  tabindex="-1">-->
+  <!--                {{setLabel}}-->
+  <!--            </span>-->
+  <!--    </button>-->
+  <!--  </div>-->
 </div>
