@@ -1,3 +1,6 @@
+<owl-date-time-inline [value]="currentValue"></owl-date-time-inline>
+
+
 <label for="daterange">Datetime range (click, then press 'Set' to modify):</label>
 <input [(ngModel)]="selectedMoments" [selectMode]="'range'"
        [owlDateTimeTrigger]="date_range_component" [owlDateTime]="date_range_component"
@@ -7,10 +10,12 @@
        style="width: 100%; color: cornflowerblue">
 
 <owl-date-time #date_range_component
-               (scheduleItemClick)="clickSchedule($event)"
+               (change)="clickSchedule($event)"
                [pickerMode]="'popup'"
                [startAt]="currentValue"
 >
+
+
   <h1 (click)="date_range_component.close()">Header</h1>
   <h1>Header1</h1>
   <h1>Header2</h1>
