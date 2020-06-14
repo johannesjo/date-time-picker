@@ -21,16 +21,7 @@ export abstract class OwlDateTime<T> {
    */
   @Input()
   startView: 'month' | 'year' | 'multi-years' = 'month';
-  @Input()
-  scheduleItem1: string;
-  @Input()
-  scheduleItem2: string;
-  @Input()
-  scheduleItem3: string;
-  @Input()
-  scheduleItem4: string;
-  @Output()
-  scheduleItemClick = new EventEmitter<number>();
+
   abstract yearSelected: EventEmitter<T>;
   abstract monthSelected: EventEmitter<T>;
   private readonly _id: string;
@@ -224,10 +215,6 @@ export abstract class OwlDateTime<T> {
       (!this.maxDateTime ||
         this.dateTimeAdapter.compare(dateTime, this.maxDateTime) <= 0)
     );
-  };
-
-  onClickScheduleItem(i: number) {
-    this.scheduleItemClick.emit(i);
   }
 
   protected getValidDate(obj: any): T | null {
