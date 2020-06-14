@@ -3,6 +3,7 @@
                       [isNoMonthSquares]="true"></owl-date-time-inline>
 
 
+
 <label for="daterange">Datetime range (click, then press 'Set' to modify):</label>
 <input [(ngModel)]="selectedMoments"
        [selectMode]="'range'"
@@ -18,10 +19,17 @@
                (change)="clickSchedule($event)"
                [pickerMode]="'popup'"
                [startAt]="currentValue"
->
+></owl-date-time>
 
+<input [(ngModel)]="selectedMoments"
+       [owlDateTimeTrigger]="singleDate"
+       [owlDateTime]="singleDate"
+       matInput
+       style="width: 100%; color: cornflowerblue">
 
-  <h1 (click)="date_range_component.close()">Header</h1>
-  <h1>Header1</h1>
-  <h1>Header2</h1>
-</owl-date-time>
+<owl-date-time #singleDate
+               [isNoMonthSquares]="true"
+               (change)="clickSchedule($event)"
+               [pickerMode]="'popup'"
+               [startAt]="currentValue"
+></owl-date-time>
