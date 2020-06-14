@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
   ];
 
 
+  now = new Date();
   currentValue: Date = new Date('4/21/2020, 12:00 AM');
   endValue: Date = new Date('4/21/2020, 11:59 PM');
 

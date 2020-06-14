@@ -1,20 +1,27 @@
 $owl-accent-color: #3f51b5 !default;
+$owl-accent-contrast-color: #fff;
+
 $owl-light-selected-bg: rgba(0, 0, 0, .04);
 $owl-light-selected-bg: orange;
 
-$owl-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-0px 24px 38px 3px rgba(0, 0, 0, 0.14),
-0px 9px 46px 8px rgba(0, 0, 0, 0.12) !default;
+$owl-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !default;
 
 $owl-divider-color: rgba(0, 0, 0, .12);
-
 $owl-inp-bg-color: rgba(0, 0, 0, .2);
-$owl-inp-fg-color: rgba(0, 0, 0, .9);
 
-$owl-hover-emphasize-bg: red;
 
-//$owl-bg: #fff !default;
 $owl-bg: green !default;
+
+$owl-text-color-strong: blue;
+$owl-text-color: yellow;
+$owl-text-color-less-intense: violet;
+$owl-text-color-muted: pink;
+
+$owl-inp-fg-color: rgba(0, 0, 0, .9);
+$owl-arrow-color: red;
+
+$owl-missing: red;
+
 
 .owl-dialog-container {
   position: relative;
@@ -26,7 +33,7 @@ $owl-bg: green !default;
   border-radius: 2px;
   overflow: auto;
   background: $owl-bg;
-  color: rgba(0, 0, 0, .87);
+  color: $owl-text-color;
   width: 100%;
   height: 100%;
   outline: none;
@@ -70,7 +77,7 @@ $owl-bg: green !default;
   font-size: 1em;
   width: 100%;
   padding: .5em;
-  color: #000000;
+  color: $owl-text-color-strong;
 
   .owl-dt-calendar-control-content {
     -webkit-box-flex: 1;
@@ -86,7 +93,7 @@ $owl-bg: green !default;
       padding: 0 .8em;
 
       &:hover {
-        background-color: $owl-hover-emphasize-bg;
+        background-color: $owl-missing;
       }
     }
   }
@@ -131,7 +138,7 @@ $owl-bg: green !default;
   border-spacing: 0;
 
   .owl-dt-calendar-header {
-    color: rgba(0, 0, 0, .4);
+    color: $owl-text-color-less-intense;
 
     .owl-dt-weekdays {
       th {
@@ -165,7 +172,7 @@ $owl-bg: green !default;
     line-height: 0;
     text-align: center;
     outline: 0;
-    color: rgba(0, 0, 0, .85);
+    color: $owl-text-color;
     -webkit-appearance: none;
     padding-top: 12px;
     -webkit-tap-highlight-color: transparent;
@@ -196,12 +203,12 @@ $owl-bg: green !default;
     opacity: .2;
   }
 
-  .owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
-    border-color: rgba(0, 0, 0, .4);
-  }
+  //.owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
+  //  border-color: rgba(0, 0, 0, .4);
+  //}
 
   .owl-dt-calendar-cell-selected {
-    color: hsla(0, 0%, 100%, .85);
+    color: $owl-accent-contrast-color;
     background-color: $owl-accent-color;
 
     &.owl-dt-calendar-cell-today {
@@ -213,7 +220,7 @@ $owl-bg: green !default;
     cursor: default;
 
     & > .owl-dt-calendar-cell-content:not(.owl-dt-calendar-cell-selected) {
-      color: rgba(0, 0, 0, .4);
+      color: $owl-text-color-muted;
     }
 
     & > .owl-dt-calendar-cell-content.owl-dt-calendar-cell-selected {
@@ -222,6 +229,7 @@ $owl-bg: green !default;
 
     & > .owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
       border-color: rgba(0, 0, 0, .2);
+      border-color: $owl-missing;
     }
   }
 
@@ -366,10 +374,11 @@ $owl-bg: green !default;
   }
 
   &:hover > .owl-dt-control-button-content {
-    background-color: rgba(0, 0, 0, .12);
+    background-color: $owl-light-selected-bg;
   }
 
   .owl-dt-control-button-arrow {
+    color: $owl-arrow-color;
     display: -webkit-box;
     display: flex;
     -webkit-box-pack: center;
@@ -395,7 +404,7 @@ $owl-bg: green !default;
   }
 
   &[disabled] {
-    color: rgba(0, 0, 0, .4);
+    color: $owl-text-color-muted;
     cursor: default;
   }
 
@@ -485,7 +494,7 @@ $owl-bg: green !default;
 
   &:hover {
     .owl-dt-control-button-content {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: $owl-missing;
     }
   }
 }
@@ -575,7 +584,7 @@ $owl-bg: green !default;
   }
 
   &:focus > .owl-dt-control-content {
-    background-color: rgba(0, 0, 0, .12);
+    background-color: $owl-missing;
   }
 
   &:not(:-moz-focusring):focus > .owl-dt-control-content {
