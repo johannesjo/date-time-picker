@@ -237,7 +237,7 @@ $owl-missing: red !default;
   }
 
   .owl-dt-calendar-cell-in-range {
-    background: rgba($owl-accent-color, .2);
+    background: $owl-missing;
 
     &.owl-dt-calendar-cell-range-from {
       border-top-left-radius: 999px;
