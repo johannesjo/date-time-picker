@@ -51,6 +51,9 @@ export abstract class OwlDateTime<T> {
     this._id = `owl-dt-picker-${nextUniqueId++}`;
   }
 
+  @Input()
+  public dayStartsAt = '9:00';
+
   /**
    * Whether to show the second's timer
    */
@@ -223,26 +226,4 @@ export abstract class OwlDateTime<T> {
       ? obj
       : null;
   }
-
-  public setToToday() {
-    this.select(new Date() as any);
-  }
-
-  public setToTomorrow() {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.select(tomorrow as any);
-  }
-
-  public setToNextWeek() {
-    const d = new Date();
-    d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
-    this.select(d as any);
-  }
-
-  public setToNone() {
-    this.select(null);
-  }
-
 }

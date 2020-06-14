@@ -529,4 +529,73 @@ export class OwlDateTimeContainerComponent<T>
       this.timer.focus();
     }
   }
+
+  public setToToday() {
+    this.dateSelected(new Date() as any);
+  }
+
+  public setToNone() {
+    this.picker.select(null);
+  }
+
+  public setToTomorrow() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this._updateDateForButtons(tomorrow as any);
+  }
+
+  public setToNextWeek() {
+    const d = new Date();
+    d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+    this._updateDateForButtons(d as any);
+  }
+
+  private _updateDateForButtons(date: any) {
+    if (this._isUserSetTime()) {
+      this.dateSelected(date as any);
+    } else {
+      const split = this.picker.dayStartsAt.split(':');
+
+      const d = this.dateTimeAdapter.createDate(
+        this.dateTimeAdapter.getYear(date),
+        this.dateTimeAdapter.getMonth(date),
+        this.dateTimeAdapter.getDate(date),
+        +split[0],
+        +split[1],
+        0
+      );
+      this.pickerMoment = d;
+      this.dateSelected(d as any);
+    }
+  }
+
+  private _isUserSetTime(): boolean {
+    if (!this.picker.selected) {
+      return false;
+    }
+
+    const now = new Date();
+    const d = new Date(this.picker.selected as any);
+
+    now.setDate(1);
+    now.setMonth(1);
+    now.setFullYear(2000);
+
+    d.setDate(1);
+    d.setMonth(1);
+    d.setFullYear(2000);
+
+    const nowN = now.getTime();
+    const dN = d.getTime();
+    const m = 60 * 2000;
+    return !this._isBetween(dN, (nowN - m), (nowN + m));
+  }
+
+  private _isBetween(x, min, max) {
+    // console.log(x, min, max);
+    // console.log('min <= x', min <= x, x - min);
+    // console.log('x <= max', x <= max, max - x);
+    return min <= x && x <= max;
+  }
 }
