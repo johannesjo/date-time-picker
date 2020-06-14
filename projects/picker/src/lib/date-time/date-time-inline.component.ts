@@ -60,6 +60,10 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
   /** The maximum valid date. */
   private _max: T | null;
 
+
+  @Output()
+  ngModelChange = new EventEmitter<T>();
+
   constructor(
     protected changeDetector: ChangeDetectorRef,
     @Optional() protected dateTimeAdapter: DateTimeAdapter<T>,
@@ -345,8 +349,9 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
     this.monthSelected.emit(normalizedMonth);
   }
 
-  private onModelChange: Function = () => {
-  };
+  private onModelChange(date) {
+    this.ngModelChange.emit(date);
+  }
 
   private onModelTouched: Function = () => {
   };
