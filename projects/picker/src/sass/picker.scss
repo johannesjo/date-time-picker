@@ -6,6 +6,7 @@ $cdk-z-index-overlay: 1000;
 $cdk-z-index-overlay-backdrop: 1000;
 $theme-color: #3f51b5 !default;
 $owl-separator-border-color: rgba(0, 0, 0, .12);
+$owl-light-selected-bg: rgba(0, 0, 0, .04);
 
 // Background color for all of the backdrops
 $cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.288);
@@ -359,7 +360,7 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
   .owl-dt-calendar-cell-active:focus > .owl-dt-calendar-cell-content:not(.owl-dt-calendar-cell-selected),
   :not(.owl-dt-calendar-cell-disabled):hover > .owl-dt-calendar-cell-content:not(.owl-dt-calendar-cell-selected) {
-    background-color: rgba(0, 0, 0, .04);
+    background-color: $owl-light-selected-bg;
   }
 
   .owl-dt-calendar-cell-in-range {
@@ -744,14 +745,33 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
   }
 }
 
+
+.owl-dt-schedule{
+  display: flex;
+  flex-direction: column;
+}
 .owl-dt-schedule-item {
-  padding: 0.5em;
+  flex: 1;
+  padding: 0 0.5em;
   font-size: 0.9em;
   background: transparent;
   border: none;
-  display: block;
   cursor: pointer;
   width: auto;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+
+  &:hover{
+    background: $owl-light-selected-bg;
+    opacity: 1;
+  }
+}
+
+.owl-dt-schedule-item--icon {
+  margin-right: 0.5em;
+  opacity: 0.5;
+  width: 1em;
 }
 
 .owl-top-input {
