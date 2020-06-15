@@ -17,6 +17,18 @@ export type SelectMode = 'single' | 'range' | 'rangeFrom' | 'rangeTo';
 @Directive()
 export abstract class OwlDateTime<T> {
   @Input()
+  sPlaceholder = 'Please select a date';
+
+  @Input()
+  sToday = 'Today';
+
+  @Input()
+  sTomorrow = 'Tomorrow';
+
+  @Input()
+  sNextWeek = 'Next week';
+
+  @Input()
   isNoMonthSquares: boolean;
 
   /**
