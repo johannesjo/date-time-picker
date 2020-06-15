@@ -1,10 +1,25 @@
-<div style="width: 500px">
+<div style="width: 300px">
   <owl-date-time-inline [value]="currentValue"
                         [dayStartsAt]="'9:33'"
                         [min]="now"
                         [isNoMonthSquares]="true"></owl-date-time-inline>
 </div>
 
+
+<div style="width: 600px; margin-top: 40px;">
+  <owl-date-time-inline [value]="currentValue"
+                        [dayStartsAt]="'6:54'"
+                        [min]="now"
+                        [isNoMonthSquares]="true"></owl-date-time-inline>
+</div>
+
+
+<div style="width: 800px; margin-top: 40px;">
+  <owl-date-time-inline [value]="currentValue"
+                        [dayStartsAt]="'9:33'"
+                        [min]="now"
+                        [isNoMonthSquares]="true"></owl-date-time-inline>
+</div>
 
 <label for="daterange">Datetime range (click, then press 'Set' to modify):</label>
 <input [(ngModel)]="selectedMoments"

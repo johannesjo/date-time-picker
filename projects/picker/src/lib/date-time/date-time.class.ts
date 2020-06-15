@@ -17,6 +17,9 @@ export type SelectMode = 'single' | 'range' | 'rangeFrom' | 'rangeTo';
 @Directive()
 export abstract class OwlDateTime<T> {
   @Input()
+  isShowTopInput = false;
+
+  @Input()
   sPlaceholder = 'Please select a date';
 
   @Input()

@@ -1,8 +1,9 @@
 <div [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
      [cdkTrapFocus]="picker.pickerMode !== 'inline'"
-     class="owl-dt-container-inner">
+     class="owl-dt-container-inne r">
 
-  <div class="owl-top-input">
+  <div class="owl-top-input"
+       *ngIf="picker.isShowTopInput">
     <input [placeholder]="picker.sPlaceholder"
            [value]="(picker.selected|date:'medium')"
            disabled="disabled"
