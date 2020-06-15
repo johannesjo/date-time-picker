@@ -6,7 +6,8 @@
     <input type="text"
            disabled="disabled"
            tabindex="-1"
-           [value]="picker.selected|date:'medium'">
+           [placeholder]="'Please select a date'"
+           [value]="(picker.selected|date:'medium')">
   </div>
 
   <div class="owl-header-wrapper">

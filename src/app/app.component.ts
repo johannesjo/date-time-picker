@@ -24,7 +24,8 @@ export class AppComponent implements AfterViewInit {
 
 
   now = new Date();
-  currentValue: Date = new Date('4/21/2020, 12:00 AM');
+  // currentValue: Date = new Date('4/21/2020, 12:00 AM');
+  currentValue: Date = null;
   endValue: Date = new Date('4/21/2020, 11:59 PM');
 
   open_once = false;
