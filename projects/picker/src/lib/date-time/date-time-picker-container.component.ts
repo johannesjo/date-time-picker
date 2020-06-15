@@ -360,6 +360,27 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
+  public setToToday() {
+    this.dateSelected(new Date() as any);
+  }
+
+  public setToNone() {
+    this.picker.select(null);
+  }
+
+  public setToTomorrow() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this._updateDateForButtons(tomorrow as any);
+  }
+
+  public setToNextWeek() {
+    const d = new Date();
+    d.setDate(d.getDate() + (7 - d.getDay()) % 7 + 1);
+    this._updateDateForButtons(d as any);
+  }
+
   /**
    * Set the value of activeSelectedIndex
    */
@@ -528,27 +549,6 @@ export class OwlDateTimeContainerComponent<T>
     } else if (this.timer) {
       this.timer.focus();
     }
-  }
-
-  public setToToday() {
-    this.dateSelected(new Date() as any);
-  }
-
-  public setToNone() {
-    this.picker.select(null);
-  }
-
-  public setToTomorrow() {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this._updateDateForButtons(tomorrow as any);
-  }
-
-  public setToNextWeek() {
-    const d = new Date();
-    d.setDate(d.getDate() + (7 - d.getDay()) % 7 + 1);
-    this._updateDateForButtons(d as any);
   }
 
   private _updateDateForButtons(date: any) {

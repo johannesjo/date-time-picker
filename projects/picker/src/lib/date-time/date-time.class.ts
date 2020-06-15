@@ -27,6 +27,10 @@ export abstract class OwlDateTime<T> {
 
   abstract yearSelected: EventEmitter<T>;
   abstract monthSelected: EventEmitter<T>;
+
+  @Input()
+  public dayStartsAt = '9:00';
+
   private readonly _id: string;
 
   protected constructor(
@@ -53,9 +57,6 @@ export abstract class OwlDateTime<T> {
 
     this._id = `owl-dt-picker-${nextUniqueId++}`;
   }
-
-  @Input()
-  public dayStartsAt = '9:00';
 
   /**
    * Whether to show the second's timer

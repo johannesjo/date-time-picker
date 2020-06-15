@@ -55,14 +55,12 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
    * */
   @Output()
   monthSelected = new EventEmitter<T>();
+  @Output()
+  ngModelChange = new EventEmitter<T>();
   /** The minimum valid date. */
   private _min: T | null;
   /** The maximum valid date. */
   private _max: T | null;
-
-
-  @Output()
-  ngModelChange = new EventEmitter<T>();
 
   constructor(
     protected changeDetector: ChangeDetectorRef,

@@ -3,40 +3,40 @@
      class="owl-dt-container-inner">
 
   <div class="owl-top-input">
-    <input type="text"
+    <input [placeholder]="'Please select a date'"
+           [value]="(picker.selected|date:'medium')"
            disabled="disabled"
            tabindex="-1"
-           [placeholder]="'Please select a date'"
-           [value]="(picker.selected|date:'medium')">
+           type="text">
   </div>
 
   <div class="owl-header-wrapper">
     <div class="owl-dt-schedule">
-      <button class="owl-dt-schedule-item"
-              tabindex="0"
-              (click)="setToToday()">
+      <button (click)="setToToday()"
+              class="owl-dt-schedule-item"
+              tabindex="0">
         <div class="owl-dt-schedule-item--icon">🌣</div>
         <div class="owl-dt-schedule-item--title">Today
         </div>
       </button>
-      <button class="owl-dt-schedule-item"
-              tabindex="0"
-              (click)="setToTomorrow()">
+      <button (click)="setToTomorrow()"
+              class="owl-dt-schedule-item"
+              tabindex="0">
         <div class="owl-dt-schedule-item--icon">🌣</div>
         <div class="owl-dt-schedule-item--title">Tomorrow</div>
       </button>
-      <button class="owl-dt-schedule-item"
-              tabindex="0"
-              (click)="setToNextWeek()">
+      <button (click)="setToNextWeek()"
+              class="owl-dt-schedule-item"
+              tabindex="0">
         <div class="owl-dt-schedule-item--icon">🗓</div>
         <div class="owl-dt-schedule-item--title">Next week</div>
       </button>
-<!--      <button class="owl-dt-schedule-item"-->
-<!--              tabindex="0"-->
-<!--              (click)="setToNone()">-->
-<!--        <div class="owl-dt-schedule-item&#45;&#45;icon">🗙</div>-->
-<!--        <div class="owl-dt-schedule-item&#45;&#45;title">No Date</div>-->
-<!--      </button>-->
+      <!--      <button class="owl-dt-schedule-item"-->
+      <!--              tabindex="0"-->
+      <!--              (click)="setToNone()">-->
+      <!--        <div class="owl-dt-schedule-item&#45;&#45;icon">🗙</div>-->
+      <!--        <div class="owl-dt-schedule-item&#45;&#45;title">No Date</div>-->
+      <!--      </button>-->
     </div>
 
     <owl-date-time-timer
@@ -58,11 +58,11 @@
     (selectedChange)="dateSelected($event)"
     (yearSelected)="picker.selectYear($event)"
     *ngIf="pickerType === 'both' || pickerType === 'calendar'"
-    [isNoMonthSquares]="picker.isNoMonthSquares"
     [(pickerMoment)]="pickerMoment"
     [dateFilter]="picker.dateTimeFilter"
     [firstDayOfWeek]="picker.firstDayOfWeek"
     [hideOtherMonths]="picker.hideOtherMonths"
+    [isNoMonthSquares]="picker.isNoMonthSquares"
     [maxDate]="picker.maxDateTime"
     [minDate]="picker.minDateTime"
     [selectMode]="picker.selectMode"
@@ -121,7 +121,7 @@
   <!--            type="button">-->
   <!--            <span class="owl-dt-control-content owl-dt-control-button-content"-->
   <!--                  tabindex="-1">-->
-  <!--                {{setLabel}}-->
+  <!--                  {{setLabel}}-->
   <!--            </span>-->
   <!--    </button>-->
   <!--  </div>-->
