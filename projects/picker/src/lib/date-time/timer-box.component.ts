@@ -69,7 +69,7 @@ export class OwlTimerBoxComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.inputStreamSub = this.inputStream.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -82,20 +82,20 @@ export class OwlTimerBoxComponent implements OnInit, OnDestroy {
     this.bindValueInputMouseWheel();
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.unbindValueInputMouseWheel();
     this.inputStreamSub.unsubscribe();
   }
 
-  public upBtnClicked(): void {
+  upBtnClicked(): void {
     this.updateValue(this.value + this.step);
   }
 
-  public downBtnClicked(): void {
+  downBtnClicked(): void {
     this.updateValue(this.value - this.step);
   }
 
-  public handleInputChange(val: string): void {
+  handleInputChange(val: string): void {
     this.inputStream.next(val);
   }
 

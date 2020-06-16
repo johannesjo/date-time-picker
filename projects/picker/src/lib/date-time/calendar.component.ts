@@ -263,7 +263,7 @@ export class OwlCalendarComponent<T>
   /**
    * Date filter for the month and year view
    */
-  public dateFilterForViews = (date: T) => {
+  dateFilterForViews = (date: T) => {
     return (
       !!date &&
       (!this.dateFilter || this.dateFilter(date)) &&
@@ -274,28 +274,28 @@ export class OwlCalendarComponent<T>
     );
   };
 
-  public ngOnInit() {
+  ngOnInit() {
   }
 
-  public ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     this._currentView = this.startView;
   }
 
-  public ngAfterViewChecked() {
+  ngAfterViewChecked() {
     if (this.moveFocusOnNextTick) {
       this.moveFocusOnNextTick = false;
       this.focusActiveCell();
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.intlChangesSub.unsubscribe();
   }
 
   /**
    * Toggle between month view and year view
    */
-  public toggleViews(): void {
+  toggleViews(): void {
     this.currentView =
       this._currentView === 'month' ? 'multi-years' : 'month';
   }
@@ -303,7 +303,7 @@ export class OwlCalendarComponent<T>
   /**
    * Handles user clicks on the previous button.
    * */
-  public previousClicked(): void {
+  previousClicked(): void {
     this.pickerMoment = this.isMonthView
       ? this.dateTimeAdapter.addCalendarMonths(this.pickerMoment, -1)
       : this.dateTimeAdapter.addCalendarYears(this.pickerMoment, -1);
@@ -314,7 +314,7 @@ export class OwlCalendarComponent<T>
   /**
    * Handles user clicks on the next button.
    * */
-  public nextClicked(): void {
+  nextClicked(): void {
     this.pickerMoment = this.isMonthView
       ? this.dateTimeAdapter.addCalendarMonths(this.pickerMoment, 1)
       : this.dateTimeAdapter.addCalendarYears(this.pickerMoment, 1);
@@ -322,7 +322,7 @@ export class OwlCalendarComponent<T>
     this.pickerMomentChange.emit(this.pickerMoment);
   }
 
-  public dateSelected(date: T): void {
+  dateSelected(date: T): void {
     if (!this.dateFilterForViews(date)) {
       return;
     }
@@ -338,7 +338,7 @@ export class OwlCalendarComponent<T>
   /**
    * Change the pickerMoment value and switch to a specific view
    */
-  public goToDateInView(
+  goToDateInView(
     date: T,
     view: 'month' | 'year' | 'multi-years'
   ): void {
@@ -350,7 +350,7 @@ export class OwlCalendarComponent<T>
   /**
    * Change the pickerMoment value
    */
-  public handlePickerMomentChange(date: T): void {
+  handlePickerMomentChange(date: T): void {
     this.pickerMoment = this.dateTimeAdapter.clampDate(
       date,
       this.minDate,
@@ -360,14 +360,14 @@ export class OwlCalendarComponent<T>
     return;
   }
 
-  public userSelected(): void {
+  userSelected(): void {
     this.userSelection.emit();
   }
 
   /**
    * Whether the previous period button is enabled.
    */
-  public prevButtonEnabled(): boolean {
+  prevButtonEnabled(): boolean {
     return (
       !this.minDate || !this.isSameView(this.pickerMoment, this.minDate)
     );
@@ -376,7 +376,7 @@ export class OwlCalendarComponent<T>
   /**
    * Whether the next period button is enabled.
    */
-  public nextButtonEnabled(): boolean {
+  nextButtonEnabled(): boolean {
     return (
       !this.maxDate || !this.isSameView(this.pickerMoment, this.maxDate)
     );
@@ -385,7 +385,7 @@ export class OwlCalendarComponent<T>
   /**
    * Focus to the host element
    * */
-  public focusActiveCell() {
+  focusActiveCell() {
     this.ngZone.runOutsideAngular(() => {
       this.ngZone.onStable
         .asObservable()
@@ -398,11 +398,11 @@ export class OwlCalendarComponent<T>
     });
   }
 
-  public selectYearInMultiYearView(normalizedYear: T): void {
+  selectYearInMultiYearView(normalizedYear: T): void {
     this.yearSelected.emit(normalizedYear);
   }
 
-  public selectMonthInYearView(normalizedMonth: T): void {
+  selectMonthInYearView(normalizedMonth: T): void {
     this.monthSelected.emit(normalizedMonth);
   }
 

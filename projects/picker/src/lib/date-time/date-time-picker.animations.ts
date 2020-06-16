@@ -42,6 +42,6 @@ export const owlDateTimePickerAnimations: {
       style({ opacity: '*' }),
       animate(ANI_LEAVE_TIMING, style({ opacity: 0 }))
     ])
-  ]),
+  ])
 };
 

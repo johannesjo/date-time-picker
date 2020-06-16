@@ -186,13 +186,13 @@ export class OwlTimerComponent<T> implements OnInit {
     return -1;
   }
 
-  public ngOnInit() {
+  ngOnInit() {
   }
 
   /**
    * Focus to the host element
    * */
-  public focus() {
+  focus() {
     this.ngZone.runOutsideAngular(() => {
       this.ngZone.onStable
         .asObservable()
@@ -207,7 +207,7 @@ export class OwlTimerComponent<T> implements OnInit {
    * Set the hour value via typing into timer box input
    * We need this to handle the hour value when the timer is in hour12 mode
    * */
-  public setHourValueViaInput(hours: number): void {
+  setHourValueViaInput(hours: number): void {
     if (this.hour12Timer && this.isPM && hours >= 1 && hours <= 11) {
       hours = hours + 12;
     } else if (this.hour12Timer && !this.isPM && hours === 12) {
@@ -217,25 +217,25 @@ export class OwlTimerComponent<T> implements OnInit {
     this.setHourValue(hours);
   }
 
-  public setHourValue(hours: number): void {
+  setHourValue(hours: number): void {
     const m = this.dateTimeAdapter.setHours(this.pickerMoment, hours);
     this.selectedChange.emit(m);
     this.cdRef.markForCheck();
   }
 
-  public setMinuteValue(minutes: number): void {
+  setMinuteValue(minutes: number): void {
     const m = this.dateTimeAdapter.setMinutes(this.pickerMoment, minutes);
     this.selectedChange.emit(m);
     this.cdRef.markForCheck();
   }
 
-  public setSecondValue(seconds: number): void {
+  setSecondValue(seconds: number): void {
     const m = this.dateTimeAdapter.setSeconds(this.pickerMoment, seconds);
     this.selectedChange.emit(m);
     this.cdRef.markForCheck();
   }
 
-  public setMeridiem(event: any): void {
+  setMeridiem(event: any): void {
     this.isPM = !this.isPM;
 
     let hours = this.hourValue;
@@ -256,7 +256,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the up hour button is enabled
    */
-  public upHourEnabled(): boolean {
+  upHourEnabled(): boolean {
     return (
       !this.maxDateTime ||
       this.compareHours(this.stepHour, this.maxDateTime) < 1
@@ -266,7 +266,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the down hour button is enabled
    */
-  public downHourEnabled(): boolean {
+  downHourEnabled(): boolean {
     return (
       !this.minDateTime ||
       this.compareHours(-this.stepHour, this.minDateTime) > -1
@@ -276,7 +276,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the up minute button is enabled
    */
-  public upMinuteEnabled(): boolean {
+  upMinuteEnabled(): boolean {
     return (
       !this.maxDateTime ||
       this.compareMinutes(this.stepMinute, this.maxDateTime) < 1
@@ -286,7 +286,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the down minute button is enabled
    */
-  public downMinuteEnabled(): boolean {
+  downMinuteEnabled(): boolean {
     return (
       !this.minDateTime ||
       this.compareMinutes(-this.stepMinute, this.minDateTime) > -1
@@ -296,7 +296,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the up second button is enabled
    */
-  public upSecondEnabled(): boolean {
+  upSecondEnabled(): boolean {
     return (
       !this.maxDateTime ||
       this.compareSeconds(this.stepSecond, this.maxDateTime) < 1
@@ -306,7 +306,7 @@ export class OwlTimerComponent<T> implements OnInit {
   /**
    * Check if the down second button is enabled
    */
-  public downSecondEnabled(): boolean {
+  downSecondEnabled(): boolean {
     return (
       !this.minDateTime ||
       this.compareSeconds(-this.stepSecond, this.minDateTime) > -1

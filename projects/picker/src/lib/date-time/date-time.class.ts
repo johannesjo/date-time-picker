@@ -16,254 +16,254 @@ export type SelectMode = 'single' | 'range' | 'rangeFrom' | 'rangeTo';
 
 @Directive()
 export abstract class OwlDateTime<T> {
-  @Input()
-  isShowTopInput: boolean;
+    @Input()
+    isShowTopInput: boolean;
 
-  @Input()
-  isHandleDoubleEnter: boolean;
+    @Input()
+    isHandleDoubleEnter: boolean;
 
-  @Input()
-  isNoMonthSquares: boolean;
+    @Input()
+    isNoMonthSquares: boolean;
 
-  @Input()
-  dayStartsAt = '9:00';
+    @Input()
+    dayStartsAt = '9:00';
 
-  @Input()
-  laterTodaySlots = [
-    '15:00',
-    '17:00',
-    '19:00',
-    '21:00',
-  ];
+    @Input()
+    laterTodaySlots = [
+        '15:00',
+        '17:00',
+        '19:00',
+        '21:00'
+    ];
 
-  @Input()
-  laterTodayMinMargin = 60 * 60 * 1000;
+    @Input()
+    laterTodayMinMargin = 60 * 60 * 1000;
 
-  @Input()
-  sPressEnterToSubmit = 'Press enter key again to save';
+    @Input()
+    sPressEnterToSubmit = 'Press enter key again to save';
 
-  @Input()
-  sPlaceholder = 'Please select a date';
+    @Input()
+    sPlaceholder = 'Please select a date';
 
-  @Input()
-  sLaterToday = 'Later Today';
+    @Input()
+    sLaterToday = 'Later Today';
 
-  @Input()
-  sTomorrow = 'Tomorrow';
+    @Input()
+    sTomorrow = 'Tomorrow';
 
-  @Input()
-  sNextWeek = 'Next week';
+    @Input()
+    sNextWeek = 'Next week';
 
-  @Output()
-  doubleEnter = new EventEmitter<void>();
+    @Output()
+    doubleEnter = new EventEmitter<void>();
 
 
-  /**
-   * The view that the calendar should start in.
-   */
-  @Input()
-  startView: 'month' | 'year' | 'multi-years' = 'month';
+    /**
+     * The view that the calendar should start in.
+     */
+    @Input()
+    startView: 'month' | 'year' | 'multi-years' = 'month';
 
-  abstract yearSelected: EventEmitter<T>;
-  abstract monthSelected: EventEmitter<T>;
+    abstract yearSelected: EventEmitter<T>;
+    abstract monthSelected: EventEmitter<T>;
 
-  private readonly _id: string;
+    private readonly _id: string;
 
-  protected constructor(
-    @Optional() protected dateTimeAdapter: DateTimeAdapter<T>,
-    @Optional()
-    @Inject(OWL_DATE_TIME_FORMATS)
-    protected dateTimeFormats: OwlDateTimeFormats
-  ) {
-    if (!this.dateTimeAdapter) {
-      throw Error(
-        `OwlDateTimePicker: No provider found for DateTimeAdapter. You must import one of the following ` +
-        `modules at your application root: OwlNativeDateTimeModule, OwlMomentDateTimeModule, or provide a ` +
-        `custom implementation.`
-      );
+    protected constructor(
+        @Optional() protected dateTimeAdapter: DateTimeAdapter<T>,
+        @Optional()
+        @Inject(OWL_DATE_TIME_FORMATS)
+        protected dateTimeFormats: OwlDateTimeFormats
+    ) {
+        if (!this.dateTimeAdapter) {
+            throw Error(
+                `OwlDateTimePicker: No provider found for DateTimeAdapter. You must import one of the following ` +
+                `modules at your application root: OwlNativeDateTimeModule, OwlMomentDateTimeModule, or provide a ` +
+                `custom implementation.`
+            );
+        }
+
+        if (!this.dateTimeFormats) {
+            throw Error(
+                `OwlDateTimePicker: No provider found for OWL_DATE_TIME_FORMATS. You must import one of the following ` +
+                `modules at your application root: OwlNativeDateTimeModule, OwlMomentDateTimeModule, or provide a ` +
+                `custom implementation.`
+            );
+        }
+
+        this._id = `owl-dt-picker-${nextUniqueId++}`;
     }
 
-    if (!this.dateTimeFormats) {
-      throw Error(
-        `OwlDateTimePicker: No provider found for OWL_DATE_TIME_FORMATS. You must import one of the following ` +
-        `modules at your application root: OwlNativeDateTimeModule, OwlMomentDateTimeModule, or provide a ` +
-        `custom implementation.`
-      );
+    /**
+     * Whether to show the second's timer
+     */
+    private _showSecondsTimer = false;
+
+    @Input()
+    get showSecondsTimer(): boolean {
+        return this._showSecondsTimer;
     }
 
-    this._id = `owl-dt-picker-${nextUniqueId++}`;
-  }
-
-  /**
-   * Whether to show the second's timer
-   */
-  private _showSecondsTimer = false;
-
-  @Input()
-  get showSecondsTimer(): boolean {
-    return this._showSecondsTimer;
-  }
-
-  set showSecondsTimer(val: boolean) {
-    this._showSecondsTimer = coerceBooleanProperty(val);
-  }
-
-  /**
-   * Whether the timer is in hour12 format
-   */
-  private _hour12Timer = false;
-
-  @Input()
-  get hour12Timer(): boolean {
-    return this._hour12Timer;
-  }
-
-  set hour12Timer(val: boolean) {
-    this._hour12Timer = coerceBooleanProperty(val);
-  }
-
-  /**
-   * Hours to change per step
-   */
-  private _stepHour = 1;
-
-  @Input()
-  get stepHour(): number {
-    return this._stepHour;
-  }
-
-  set stepHour(val: number) {
-    this._stepHour = coerceNumberProperty(val, 1);
-  }
-
-  /**
-   * Minutes to change per step
-   */
-  private _stepMinute = 1;
-
-  @Input()
-  get stepMinute(): number {
-    return this._stepMinute;
-  }
-
-  set stepMinute(val: number) {
-    this._stepMinute = coerceNumberProperty(val, 1);
-  }
-
-  /**
-   * Seconds to change per step
-   */
-  private _stepSecond = 1;
-
-  @Input()
-  get stepSecond(): number {
-    return this._stepSecond;
-  }
-
-  set stepSecond(val: number) {
-    this._stepSecond = coerceNumberProperty(val, 1);
-  }
-
-  /**
-   * Set the first day of week
-   */
-  private _firstDayOfWeek: number;
-
-  @Input()
-  get firstDayOfWeek() {
-    return this._firstDayOfWeek;
-  }
-
-  set firstDayOfWeek(value: number) {
-    value = coerceNumberProperty(value);
-    if (value > 6 || value < 0) {
-      this._firstDayOfWeek = undefined;
-    } else {
-      this._firstDayOfWeek = value;
+    set showSecondsTimer(val: boolean) {
+        this._showSecondsTimer = coerceBooleanProperty(val);
     }
-  }
 
-  /**
-   * Whether to hide dates in other months at the start or end of the current month.
-   */
-  private _hideOtherMonths = false;
+    /**
+     * Whether the timer is in hour12 format
+     */
+    private _hour12Timer = false;
 
-  @Input()
-  get hideOtherMonths(): boolean {
-    return this._hideOtherMonths;
-  }
+    @Input()
+    get hour12Timer(): boolean {
+        return this._hour12Timer;
+    }
 
-  set hideOtherMonths(val: boolean) {
-    this._hideOtherMonths = coerceBooleanProperty(val);
-  }
+    set hour12Timer(val: boolean) {
+        this._hour12Timer = coerceBooleanProperty(val);
+    }
 
-  get id(): string {
-    return this._id;
-  }
+    /**
+     * Hours to change per step
+     */
+    private _stepHour = 1;
 
-  abstract get selected(): T | null;
+    @Input()
+    get stepHour(): number {
+        return this._stepHour;
+    }
 
-  abstract get selecteds(): T[] | null;
+    set stepHour(val: number) {
+        this._stepHour = coerceNumberProperty(val, 1);
+    }
 
-  abstract get dateTimeFilter(): (date: T | null) => boolean;
+    /**
+     * Minutes to change per step
+     */
+    private _stepMinute = 1;
 
-  abstract get maxDateTime(): T | null;
+    @Input()
+    get stepMinute(): number {
+        return this._stepMinute;
+    }
 
-  abstract get minDateTime(): T | null;
+    set stepMinute(val: number) {
+        this._stepMinute = coerceNumberProperty(val, 1);
+    }
 
-  abstract get selectMode(): SelectMode;
+    /**
+     * Seconds to change per step
+     */
+    private _stepSecond = 1;
 
-  abstract get startAt(): T | null;
+    @Input()
+    get stepSecond(): number {
+        return this._stepSecond;
+    }
 
-  abstract get endAt(): T | null;
+    set stepSecond(val: number) {
+        this._stepSecond = coerceNumberProperty(val, 1);
+    }
 
-  abstract get opened(): boolean;
+    /**
+     * Set the first day of week
+     */
+    private _firstDayOfWeek: number;
 
-  abstract get pickerMode(): PickerMode;
+    @Input()
+    get firstDayOfWeek() {
+        return this._firstDayOfWeek;
+    }
 
-  abstract get pickerType(): PickerType;
+    set firstDayOfWeek(value: number) {
+        value = coerceNumberProperty(value);
+        if (value > 6 || value < 0) {
+            this._firstDayOfWeek = undefined;
+        } else {
+            this._firstDayOfWeek = value;
+        }
+    }
 
-  abstract get isInSingleMode(): boolean;
+    /**
+     * Whether to hide dates in other months at the start or end of the current month.
+     */
+    private _hideOtherMonths = false;
 
-  abstract get isInRangeMode(): boolean;
+    @Input()
+    get hideOtherMonths(): boolean {
+        return this._hideOtherMonths;
+    }
 
-  get formatString(): string {
-    return this.pickerType === 'both'
-      ? this.dateTimeFormats.fullPickerInput
-      : this.pickerType === 'calendar'
-        ? this.dateTimeFormats.datePickerInput
-        : this.dateTimeFormats.timePickerInput;
-  }
+    set hideOtherMonths(val: boolean) {
+        this._hideOtherMonths = coerceBooleanProperty(val);
+    }
 
-  get disabled(): boolean {
-    return false;
-  }
+    get id(): string {
+        return this._id;
+    }
 
-  abstract select(date: T | T[]): void;
+    abstract get selected(): T | null;
 
-  abstract selectYear(normalizedYear: T): void;
+    abstract get selecteds(): T[] | null;
 
-  abstract selectMonth(normalizedMonth: T): void;
+    abstract get dateTimeFilter(): (date: T | null) => boolean;
 
-  /**
-   * Date Time Checker to check if the give dateTime is selectable
-   */
-  public dateTimeChecker = (dateTime: T) => {
-    return (
-      !!dateTime &&
-      (!this.dateTimeFilter || this.dateTimeFilter(dateTime)) &&
-      (!this.minDateTime ||
-        this.dateTimeAdapter.compare(dateTime, this.minDateTime) >=
-        0) &&
-      (!this.maxDateTime ||
-        this.dateTimeAdapter.compare(dateTime, this.maxDateTime) <= 0)
-    );
-  };
+    abstract get maxDateTime(): T | null;
 
-  protected getValidDate(obj: any): T | null {
-    return this.dateTimeAdapter.isDateInstance(obj) &&
-    this.dateTimeAdapter.isValid(obj)
-      ? obj
-      : null;
-  }
+    abstract get minDateTime(): T | null;
+
+    abstract get selectMode(): SelectMode;
+
+    abstract get startAt(): T | null;
+
+    abstract get endAt(): T | null;
+
+    abstract get opened(): boolean;
+
+    abstract get pickerMode(): PickerMode;
+
+    abstract get pickerType(): PickerType;
+
+    abstract get isInSingleMode(): boolean;
+
+    abstract get isInRangeMode(): boolean;
+
+    get formatString(): string {
+        return this.pickerType === 'both'
+            ? this.dateTimeFormats.fullPickerInput
+            : this.pickerType === 'calendar'
+                ? this.dateTimeFormats.datePickerInput
+                : this.dateTimeFormats.timePickerInput;
+    }
+
+    get disabled(): boolean {
+        return false;
+    }
+
+    abstract select(date: T | T[]): void;
+
+    abstract selectYear(normalizedYear: T): void;
+
+    abstract selectMonth(normalizedMonth: T): void;
+
+    /**
+     * Date Time Checker to check if the give dateTime is selectable
+     */
+    dateTimeChecker = (dateTime: T) => {
+        return (
+            !!dateTime &&
+            (!this.dateTimeFilter || this.dateTimeFilter(dateTime)) &&
+            (!this.minDateTime ||
+                this.dateTimeAdapter.compare(dateTime, this.minDateTime) >=
+                0) &&
+            (!this.maxDateTime ||
+                this.dateTimeAdapter.compare(dateTime, this.maxDateTime) <= 0)
+        );
+    };
+
+    protected getValidDate(obj: any): T | null {
+        return this.dateTimeAdapter.isDateInstance(obj) &&
+        this.dateTimeAdapter.isValid(obj)
+            ? obj
+            : null;
+    }
 }

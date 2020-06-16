@@ -291,11 +291,11 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
     return true;
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.container.picker = this;
   }
 
-  public writeValue(value: any): void {
+  writeValue(value: any): void {
     if (this.isInSingleMode) {
       this.value = value;
       this.container.pickerMoment = value;
@@ -307,19 +307,19 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
     }
   }
 
-  public registerOnChange(fn: any): void {
+  registerOnChange(fn: any): void {
     this.onModelChange = fn;
   }
 
-  public registerOnTouched(fn: any): void {
+  registerOnTouched(fn: any): void {
     this.onModelTouched = fn;
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  public select(date: T[] | T): void {
+  select(date: T[] | T): void {
     if (this.disabled) {
       return;
     }
@@ -336,14 +336,14 @@ export class OwlDateTimeInlineComponent<T> extends OwlDateTime<T>
   /**
    * Emits the selected year in multi-year view
    * */
-  public selectYear(normalizedYear: T): void {
+  selectYear(normalizedYear: T): void {
     this.yearSelected.emit(normalizedYear);
   }
 
   /**
    * Emits selected month in year view
    * */
-  public selectMonth(normalizedMonth: T): void {
+  selectMonth(normalizedMonth: T): void {
     this.monthSelected.emit(normalizedMonth);
   }
 

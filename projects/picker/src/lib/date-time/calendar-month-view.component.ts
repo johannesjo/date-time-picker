@@ -51,14 +51,14 @@ export class OwlMonthViewComponent<T>
   /**
    * The date of the month that today falls on.
    * */
-  public todayDate: number | null;
+  todayDate: number | null;
   /**
    * An array to hold all selectedDates' value
    * the value is the day number in current month
    * */
-  public selectedDates: number[] = [];
+  selectedDates: number[] = [];
   // the index of cell that contains the first date of the month
-  public firstRowOffset: number;
+  firstRowOffset: number;
   /**
    * Callback to invoke when a new date is selected
    * */
@@ -285,7 +285,7 @@ export class OwlMonthViewComponent<T>
     return true;
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.generateWeekDays();
 
     this.localeSub = this.dateTimeAdapter.localeChanges.subscribe(
@@ -300,19 +300,19 @@ export class OwlMonthViewComponent<T>
     );
   }
 
-  public ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     this.generateCalendar();
     this.initiated = true;
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.localeSub.unsubscribe();
   }
 
   /**
    * Handle a calendarCell selected
    */
-  public selectCalendarCell(cell: CalendarCell): void {
+  selectCalendarCell(cell: CalendarCell): void {
     // Cases in which the date would not be selected
     // 1, the calendar cell is NOT enabled (is NOT valid)
     // 2, the selected date is NOT in current picker's month and the hideOtherMonths is enabled
@@ -326,7 +326,7 @@ export class OwlMonthViewComponent<T>
   /**
    * Handle keydown event on calendar body
    */
-  public handleCalendarKeydown(event: KeyboardEvent): void {
+  handleCalendarKeydown(event: KeyboardEvent): void {
     let moment;
     switch (event.keyCode) {
       // minus 1 day
@@ -431,7 +431,7 @@ export class OwlMonthViewComponent<T>
   /**
    * Check if the give dates are none-null and in the same month
    */
-  public isSameMonth(dateLeft: T, dateRight: T): boolean {
+  isSameMonth(dateLeft: T, dateRight: T): boolean {
     return !!(
       dateLeft &&
       dateRight &&

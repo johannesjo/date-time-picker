@@ -79,7 +79,7 @@ export class OwlCalendarBodyComponent implements OnInit {
    * Emit when a calendar cell is selected
    * */
   @Output()
-  public readonly select = new EventEmitter<CalendarCell>();
+  readonly select = new EventEmitter<CalendarCell>();
 
   constructor(private elmRef: ElementRef, private ngZone: NgZone) {
   }
@@ -100,14 +100,14 @@ export class OwlCalendarBodyComponent implements OnInit {
     );
   }
 
-  public ngOnInit() {
+  ngOnInit() {
   }
 
-  public selectCell(cell: CalendarCell): void {
+  selectCell(cell: CalendarCell): void {
     this.select.emit(cell);
   }
 
-  public isActiveCell(rowIndex: number, colIndex: number): boolean {
+  isActiveCell(rowIndex: number, colIndex: number): boolean {
     const cellNumber = rowIndex * this.numCols + colIndex;
     return cellNumber === this.activeCell;
   }
@@ -115,7 +115,7 @@ export class OwlCalendarBodyComponent implements OnInit {
   /**
    * Check if the cell is selected
    */
-  public isSelected(value: number): boolean {
+  isSelected(value: number): boolean {
     if (!this.selectedValues || this.selectedValues.length === 0) {
       return false;
     }
@@ -135,7 +135,7 @@ export class OwlCalendarBodyComponent implements OnInit {
   /**
    * Check if the cell in the range
    * */
-  public isInRange(value: number): boolean {
+  isInRange(value: number): boolean {
     if (this.isInRangeMode) {
       const fromValue = this.selectedValues[0];
       const toValue = this.selectedValues[1];
@@ -151,7 +151,7 @@ export class OwlCalendarBodyComponent implements OnInit {
   /**
    * Check if the cell is the range from
    * */
-  public isRangeFrom(value: number): boolean {
+  isRangeFrom(value: number): boolean {
     if (this.isInRangeMode) {
       const fromValue = this.selectedValues[0];
       return fromValue !== null && value === fromValue;
@@ -161,7 +161,7 @@ export class OwlCalendarBodyComponent implements OnInit {
   /**
    * Check if the cell is the range to
    * */
-  public isRangeTo(value: number): boolean {
+  isRangeTo(value: number): boolean {
     if (this.isInRangeMode) {
       const toValue = this.selectedValues[1];
       return toValue !== null && value === toValue;
@@ -171,7 +171,7 @@ export class OwlCalendarBodyComponent implements OnInit {
   /**
    * Focus to a active cell
    * */
-  public focusActiveCell(): void {
+  focusActiveCell(): void {
     this.ngZone.runOutsideAngular(() => {
       this.ngZone.onStable
         .asObservable()

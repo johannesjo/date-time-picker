@@ -87,11 +87,11 @@ export class OwlDateTimeInputDirective<T>
   @Output()
   dateTimeInput = new EventEmitter<any>();
   /** The date-time-picker that this input is associated with. */
-  public dtPicker: OwlDateTimeComponent<T>;
+  dtPicker: OwlDateTimeComponent<T>;
   /** Emits when the value changes (either due to user input or programmatic change). */
-  public valueChange = new EventEmitter<T[] | T | null>();
+  valueChange = new EventEmitter<T[] | T | null>();
   /** Emits when the disabled state has changed */
-  public disabledChange = new EventEmitter<boolean>();
+  disabledChange = new EventEmitter<boolean>();
   private dtPickerSub: Subscription = Subscription.EMPTY;
   private localeSub: Subscription = Subscription.EMPTY;
   private lastValueValid = true;
@@ -325,7 +325,7 @@ export class OwlDateTimeInputDirective<T>
     return this.disabled;
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     if (!this.dtPicker) {
       throw Error(
         `OwlDateTimePicker: the picker input doesn't have any associated owl-date-time component`
@@ -333,7 +333,7 @@ export class OwlDateTimeInputDirective<T>
     }
   }
 
-  public ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     this.dtPickerSub = this.dtPicker.confirmSelectedChange.subscribe(
       (selecteds: T[] | T) => {
         if (Array.isArray(selecteds)) {
@@ -358,14 +358,14 @@ export class OwlDateTimeInputDirective<T>
     );
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.dtPickerSub.unsubscribe();
     this.localeSub.unsubscribe();
     this.valueChange.complete();
     this.disabledChange.complete();
   }
 
-  public writeValue(value: any): void {
+  writeValue(value: any): void {
     if (this.isInSingleMode) {
       this.value = value;
     } else {
@@ -373,41 +373,41 @@ export class OwlDateTimeInputDirective<T>
     }
   }
 
-  public registerOnChange(fn: any): void {
+  registerOnChange(fn: any): void {
     this.onModelChange = fn;
   }
 
-  public registerOnTouched(fn: any): void {
+  registerOnTouched(fn: any): void {
     this.onModelTouched = fn;
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  public validate(c: AbstractControl): { [key: string]: any } {
+  validate(c: AbstractControl): { [key: string]: any } {
     return this.validator ? this.validator(c) : null;
   }
 
-  public registerOnValidatorChange(fn: () => void): void {
+  registerOnValidatorChange(fn: () => void): void {
     this.validatorOnChange = fn;
   }
 
   /**
    * Open the picker when user hold alt + DOWN_ARROW
    * */
-  public handleKeydownOnHost(event: KeyboardEvent): void {
+  handleKeydownOnHost(event: KeyboardEvent): void {
     if (event.altKey && event.keyCode === DOWN_ARROW) {
       this.dtPicker.open();
       event.preventDefault();
     }
   }
 
-  public handleBlurOnHost(event: Event): void {
+  handleBlurOnHost(event: Event): void {
     this.onModelTouched();
   }
 
-  public handleInputOnHost(event: any): void {
+  handleInputOnHost(event: any): void {
     const value = event.target.value;
     if (this._selectMode === 'single') {
       this.changeInputInSingleMode(value);
@@ -418,7 +418,7 @@ export class OwlDateTimeInputDirective<T>
     }
   }
 
-  public handleChangeOnHost(event: any): void {
+  handleChangeOnHost(event: any): void {
 
     let v;
     if (this.isInSingleMode) {
@@ -437,7 +437,7 @@ export class OwlDateTimeInputDirective<T>
   /**
    * Set the native input property 'value'
    */
-  public formatNativeInputValue(): void {
+  formatNativeInputValue(): void {
     if (this.isInSingleMode) {
       this.renderer.setProperty(
         this.elmRef.nativeElement,

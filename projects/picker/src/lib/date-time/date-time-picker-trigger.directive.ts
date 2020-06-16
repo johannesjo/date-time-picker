@@ -37,24 +37,24 @@ export class OwlDateTimeTriggerDirective<T> implements OnInit, OnChanges, AfterC
     return this.disabled;
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.datepicker) {
       this.watchStateChanges();
     }
   }
 
-  public ngAfterContentInit() {
+  ngAfterContentInit() {
     this.watchStateChanges();
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.stateChanges.unsubscribe();
   }
 
-  public handleClickOnHost(event: Event): void {
+  handleClickOnHost(event: Event): void {
     if (this.dtPicker) {
       this.dtPicker.open();
       event.stopPropagation();

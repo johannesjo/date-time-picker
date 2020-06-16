@@ -102,39 +102,39 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     this._clampDate = platform.TRIDENT || platform.EDGE;
   }
 
-  public getYear(date: Date): number {
+  getYear(date: Date): number {
     return date.getFullYear();
   }
 
-  public getMonth(date: Date): number {
+  getMonth(date: Date): number {
     return date.getMonth();
   }
 
-  public getDay(date: Date): number {
+  getDay(date: Date): number {
     return date.getDay();
   }
 
-  public getDate(date: Date): number {
+  getDate(date: Date): number {
     return date.getDate();
   }
 
-  public getHours(date: Date): number {
+  getHours(date: Date): number {
     return date.getHours();
   }
 
-  public getMinutes(date: Date): number {
+  getMinutes(date: Date): number {
     return date.getMinutes();
   }
 
-  public getSeconds(date: Date): number {
+  getSeconds(date: Date): number {
     return date.getSeconds();
   }
 
-  public getTime(date: Date): number {
+  getTime(date: Date): number {
     return date.getTime();
   }
 
-  public getNumDaysInMonth(date: Date): number {
+  getNumDaysInMonth(date: Date): number {
     const lastDateOfMonth = this.createDateWithOverflow(
       this.getYear(date),
       this.getMonth(date) + 1,
@@ -144,7 +144,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return this.getDate(lastDateOfMonth);
   }
 
-  public differenceInCalendarDays(dateLeft: Date, dateRight: Date): number {
+  differenceInCalendarDays(dateLeft: Date, dateRight: Date): number {
     if (this.isValid(dateLeft) && this.isValid(dateRight)) {
       const dateLeftStartOfDay = this.createDate(
         this.getYear(dateLeft),
@@ -173,7 +173,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     }
   }
 
-  public getYearName(date: Date): string {
+  getYearName(date: Date): string {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.getLocale(), {
         year: 'numeric',
@@ -184,7 +184,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return String(this.getYear(date));
   }
 
-  public getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+  getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.getLocale(), {
         month: style,
@@ -199,7 +199,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return DEFAULT_MONTH_NAMES[style];
   }
 
-  public getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+  getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.getLocale(), {
         weekday: style,
@@ -215,7 +215,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return DEFAULT_DAY_OF_WEEK_NAMES[style];
   }
 
-  public getDateNames(): string[] {
+  getDateNames(): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.getLocale(), {
         day: 'numeric',
@@ -230,11 +230,11 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return DEFAULT_DATE_NAMES;
   }
 
-  public toIso8601(date: Date): string {
+  toIso8601(date: Date): string {
     return date.toISOString();
   }
 
-  public isEqual(dateLeft: Date, dateRight: Date): boolean {
+  isEqual(dateLeft: Date, dateRight: Date): boolean {
     if (this.isValid(dateLeft) && this.isValid(dateRight)) {
       return dateLeft.getTime() === dateRight.getTime();
     } else {
@@ -242,7 +242,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     }
   }
 
-  public isSameDay(dateLeft: Date, dateRight: Date): boolean {
+  isSameDay(dateLeft: Date, dateRight: Date): boolean {
     if (this.isValid(dateLeft) && this.isValid(dateRight)) {
       const dateLeftStartOfDay = this.clone(dateLeft);
       const dateRightStartOfDay = this.clone(dateRight);
@@ -256,23 +256,23 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     }
   }
 
-  public isValid(date: Date): boolean {
+  isValid(date: Date): boolean {
     return date && !isNaN(date.getTime());
   }
 
-  public invalid(): Date {
+  invalid(): Date {
     return new Date(NaN);
   }
 
-  public isDateInstance(obj: any): boolean {
+  isDateInstance(obj: any): boolean {
     return obj instanceof Date;
   }
 
-  public addCalendarYears(date: Date, amount: number): Date {
+  addCalendarYears(date: Date, amount: number): Date {
     return this.addCalendarMonths(date, amount * 12);
   }
 
-  public addCalendarMonths(date: Date, amount: number): Date {
+  addCalendarMonths(date: Date, amount: number): Date {
     const result = this.clone(date);
     amount = Number(amount);
 
@@ -288,32 +288,32 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return result;
   }
 
-  public addCalendarDays(date: Date, amount: number): Date {
+  addCalendarDays(date: Date, amount: number): Date {
     const result = this.clone(date);
     amount = Number(amount);
     result.setDate(result.getDate() + amount);
     return result;
   }
 
-  public setHours(date: Date, amount: number): Date {
+  setHours(date: Date, amount: number): Date {
     const result = this.clone(date);
     result.setHours(amount);
     return result;
   }
 
-  public setMinutes(date: Date, amount: number): Date {
+  setMinutes(date: Date, amount: number): Date {
     const result = this.clone(date);
     result.setMinutes(amount);
     return result;
   }
 
-  public setSeconds(date: Date, amount: number): Date {
+  setSeconds(date: Date, amount: number): Date {
     const result = this.clone(date);
     result.setSeconds(amount);
     return result;
   }
 
-  public createDate(
+  createDate(
     year: number,
     month: number,
     date: number,
@@ -371,7 +371,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return result;
   }
 
-  public clone(date: Date): Date {
+  clone(date: Date): Date {
     return this.createDate(
       this.getYear(date),
       this.getMonth(date),
@@ -382,11 +382,11 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     );
   }
 
-  public now(): Date {
+  now(): Date {
     return new Date();
   }
 
-  public format(date: Date, displayFormat: any): string {
+  format(date: Date, displayFormat: any): string {
     if (!this.isValid(date)) {
       throw Error('JSNativeDate: Cannot format invalid date.');
     }
@@ -410,7 +410,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
     return this.stripDirectionalityCharacters(date.toDateString());
   }
 
-  public parse(value: any, parseFormat: any): Date | null {
+  parse(value: any, parseFormat: any): Date | null {
     // There is no way using the native JS Date to set the parse format or locale
     if (typeof value === 'number') {
       return new Date(value);
@@ -423,7 +423,7 @@ export class NativeDateTimeAdapter extends DateTimeAdapter<Date> {
    * (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an
    * invalid date for all other values.
    */
-  public deserialize(value: any): Date | null {
+  deserialize(value: any): Date | null {
     if (typeof value === 'string') {
       if (!value) {
         return null;

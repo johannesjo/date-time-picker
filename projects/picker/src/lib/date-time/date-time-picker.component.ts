@@ -63,17 +63,17 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
   implements OnInit, OnDestroy {
   /** Custom class for the picker backdrop. */
   @Input()
-  public backdropClass: string | string[] = [];
+  backdropClass: string | string[] = [];
 
   /** Custom class for the picker overlay pane. */
   @Input()
-  public panelClass: string | string[] = [];
+  panelClass: string | string[] = [];
   /**
    * The scroll strategy when the picker is open
    * Learn more this from https://material.angular.io/cdk/overlay/overview#scroll-strategies
    * */
   @Input()
-  public scrollStrategy: ScrollStrategy;
+  scrollStrategy: ScrollStrategy;
   /**
    * Callback when the picker is closed
    * */
@@ -99,11 +99,11 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
   /**
    * Emit when the selected value has been confirmed
    * */
-  public confirmSelectedChange = new EventEmitter<T[] | T>();
+  confirmSelectedChange = new EventEmitter<T[] | T>();
   /**
    * Emits when the date time picker is disabled.
    * */
-  public disabledChange = new EventEmitter<boolean>();
+  disabledChange = new EventEmitter<boolean>();
   private pickerContainerPortal: ComponentPortal<OwlDateTimeContainerComponent<T>>;
   private pickerContainer: OwlDateTimeContainerComponent<T>;
   private popupRef: OverlayRef;
@@ -321,10 +321,10 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
     return this._dtInput.isInRangeMode;
   }
 
-  public ngOnInit() {
+  ngOnInit() {
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.close();
     this.dtInputSub.unsubscribe();
     this.disabledChange.complete();
@@ -334,7 +334,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
     }
   }
 
-  public registerInput(input: OwlDateTimeInputDirective<T>): void {
+  registerInput(input: OwlDateTimeInputDirective<T>): void {
     if (this._dtInput) {
       throw Error(
         'A Owl DateTimePicker can only be associated with a single input.'
@@ -353,7 +353,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
     );
   }
 
-  public open(): void {
+  open(): void {
     if (this._opened || this.disabled) {
       return;
     }
@@ -410,7 +410,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
   /**
    * Selects the given date
    */
-  public select(date: T[] | T): void {
+  select(date: T[] | T): void {
     if (Array.isArray(date)) {
       this.selecteds = [...date];
     } else {
@@ -443,21 +443,21 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
   /**
    * Emits the selected year in multi-year view
    * */
-  public selectYear(normalizedYear: T): void {
+  selectYear(normalizedYear: T): void {
     this.yearSelected.emit(normalizedYear);
   }
 
   /**
    * Emits selected month in year view
    * */
-  public selectMonth(normalizedMonth: T): void {
+  selectMonth(normalizedMonth: T): void {
     this.monthSelected.emit(normalizedMonth);
   }
 
   /**
    * Hide the picker
    */
-  public close(): void {
+  close(): void {
     if (!this._opened) {
       return;
     }
@@ -520,7 +520,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T>
   /**
    * Confirm the selected value
    */
-  public confirmSelect(event?: any): void {
+  confirmSelect(event?: any): void {
     if (this.isInSingleMode) {
       const selected =
         this.selected || this.startAt || this.dateTimeAdapter.now();

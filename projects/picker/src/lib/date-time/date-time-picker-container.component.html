@@ -1,11 +1,11 @@
-<div [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
+<div (keydown)="handleKeydown($event)"
+     [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
      [cdkTrapFocus]="picker.pickerMode !== 'inline'"
-     (keydown)="handleKeydown($event)"
      class="owl-dt-container-inner">
 
-  <div class="owl-top-input"
+  <div *ngIf="picker.isShowTopInput"
        2
-       *ngIf="picker.isShowTopInput">
+       class="owl-top-input">
     <input [placeholder]="picker.sPlaceholder"
            [value]="(picker.selected|date:'medium')"
            disabled="disabled"
@@ -56,9 +56,9 @@
   </div>
 
   <div class="owl-wrap-cal">
-    <div class="owl-enter-message"
+    <div *ngIf="isShowPopup$|async"
          [@fade]
-         *ngIf="isShowPopup$|async">{{picker.sPressEnterToSubmit}}</div>
+         class="owl-enter-message">{{picker.sPressEnterToSubmit}}</div>
     <owl-date-time-calendar
       (monthSelected)="picker.selectMonth($event)"
       (selectedChange)="dateSelected($event)"

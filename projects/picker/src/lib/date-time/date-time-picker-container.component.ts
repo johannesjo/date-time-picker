@@ -54,9 +54,9 @@ export class OwlDateTimeContainerComponent<T>
   calendar: OwlCalendarComponent<T>;
   @ViewChild(OwlTimerComponent)
   timer: OwlTimerComponent<T>;
-
+  picker: OwlDateTime<T>;
+  activeSelectedIndex = 0; // The current active SelectedIndex in range select mode (0: 'from', 1: 'to')
   private _triggerPopup$ = new Subject<boolean>();
-
   // typing aren't needed since TypeScript will get the type by parsing the code
   isShowPopup$ = this._triggerPopup$.pipe(
     switchMap((isShow) => isShow
@@ -67,10 +67,6 @@ export class OwlDateTimeContainerComponent<T>
       : of(false)
     )
   );
-
-  picker: OwlDateTime<T>;
-  activeSelectedIndex = 0; // The current active SelectedIndex in range select mode (0: 'from', 1: 'to')
-
   // retain start and end time
   private retainStartTime: T;
   private retainEndTime: T;
