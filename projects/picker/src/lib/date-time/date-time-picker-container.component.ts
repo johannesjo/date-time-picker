@@ -9,6 +9,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   Optional,
   ViewChild
@@ -19,9 +20,10 @@ import { OwlCalendarComponent } from './calendar.component';
 import { OwlTimerComponent } from './timer.component';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
 import { OwlDateTime, PickerType } from './date-time.class';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { owlDateTimePickerAnimations } from './date-time-picker.animations';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { mapTo, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   exportAs: 'owlDateTimeContainer',
@@ -46,11 +48,23 @@ import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/c
   }
 })
 export class OwlDateTimeContainerComponent<T>
-  implements OnInit, AfterContentInit, AfterViewInit {
+  implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(OwlCalendarComponent)
   calendar: OwlCalendarComponent<T>;
   @ViewChild(OwlTimerComponent)
   timer: OwlTimerComponent<T>;
+
+  private _triggerPopup$ = new Subject<any>();
+
+  // typing aren't needed since TypeScript will get the type by parsing the code
+  isShowPopup$ = this._triggerPopup$.pipe(
+    switchMap(() =>
+      timer(1000).pipe(
+        mapTo(false),
+        startWith(true) // until the timer fires, you'll have this value
+      )
+    )
+  );
 
   public picker: OwlDateTime<T>;
   public activeSelectedIndex = 0; // The current active SelectedIndex in range select mode (0: 'from', 1: 'to')
@@ -73,7 +87,9 @@ export class OwlDateTimeContainerComponent<T>
    * highlighted when using keyboard navigation.
    */
   private _clamPickerMoment: T;
+  private _lastFocusEl: HTMLInputElement | HTMLTableCellElement | HTMLButtonElement;
   private _lastBtn: HTMLButtonElement;
+  private _subs = new Subscription();
 
   constructor(private cdRef: ChangeDetectorRef,
               private elmRef: ElementRef,
@@ -216,6 +232,10 @@ export class OwlDateTimeContainerComponent<T>
 
   public ngAfterViewInit(): void {
     this.focusPicker();
+  }
+
+  public ngOnDestroy() {
+    this._subs.unsubscribe();
   }
 
   public handleContainerAnimationDone(event: AnimationEvent): void {
@@ -370,8 +390,17 @@ export class OwlDateTimeContainerComponent<T>
     const isButtons = tt.classList.contains('owl-dt-schedule-item');
     const isTime = tt.classList.contains('owl-dt-timer-input');
     const isCalendarCell = tt.classList.contains('owl-dt-calendar-cell');
+    const isCalendarDayCell = tt.classList.contains('owl-dt-day');
 
-    if (isButtons) {
+
+    if (event.keyCode === ENTER && (isButtons || isTime || isCalendarDayCell)) {
+      if (tt === this._lastFocusEl) {
+        console.log('SUBMIT');
+      } else {
+        this._triggerPopup$.next();
+      }
+      this._lastFocusEl = tt;
+    } else if (isButtons) {
       const t: HTMLButtonElement = tt as HTMLButtonElement;
       switch (event.keyCode) {
         case DOWN_ARROW: {

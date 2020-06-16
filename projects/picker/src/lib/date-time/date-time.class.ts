@@ -17,13 +17,19 @@ export type SelectMode = 'single' | 'range' | 'rangeFrom' | 'rangeTo';
 @Directive()
 export abstract class OwlDateTime<T> {
   @Input()
-  isShowTopInput = false;
+  isShowTopInput: boolean;
 
   @Input()
-  public dayStartsAt = '9:00';
+  isHandleDoubleEnter: boolean;
 
   @Input()
-  public laterTodaySlots = [
+  isNoMonthSquares: boolean;
+
+  @Input()
+  dayStartsAt = '9:00';
+
+  @Input()
+  laterTodaySlots = [
     '15:00',
     '17:00',
     '19:00',
@@ -31,7 +37,10 @@ export abstract class OwlDateTime<T> {
   ];
 
   @Input()
-  public laterTodayMinMargin = 60 * 60 * 1000;
+  laterTodayMinMargin = 60 * 60 * 1000;
+
+  @Input()
+  sPressEnterToSubmit = 'Press enter key again to save';
 
   @Input()
   sPlaceholder = 'Please select a date';
@@ -45,8 +54,6 @@ export abstract class OwlDateTime<T> {
   @Input()
   sNextWeek = 'Next week';
 
-  @Input()
-  isNoMonthSquares: boolean;
 
   /**
    * The view that the calendar should start in.

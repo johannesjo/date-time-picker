@@ -24,7 +24,7 @@ $owl-text-color: rgba(0, 0, 0, .75);
 $owl-text-color-less-intense: rgba(0, 0, 0, .5);
 $owl-text-color-muted: rgba(0, 0, 0, .15);
 
-$owl-light-selected-bg: rgba(0, 0, 0, .1);
+$owl-light-selected-bg: rgb(230, 230, 230);
 
 $owl-divider-color: rgba(0, 0, 0, .12);
 
@@ -773,4 +773,23 @@ $owl-missing: yellowgreen !default;
       background: $owl-dark-inp-bg-color;
     }
   }
+}
+
+.owl-enter-message {
+  color: $owl-text-color-strong;
+  background: $owl-light-selected-bg;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  max-width: 96%;
+  width: 280px;
+  font-size: 1em;
+  padding: 0.25em 1em;
+  transform: translate(-50%, 0);
+  border-radius: 4px;
+  z-index: 999;
+}
+
+.owl-wrap-cal {
+  position: relative;
 }

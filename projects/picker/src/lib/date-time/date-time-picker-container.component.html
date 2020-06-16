@@ -3,7 +3,8 @@
      (keydown)="handleKeydown($event)"
      class="owl-dt-container-inner">
 
-  <div class="owl-top-input"2
+  <div class="owl-top-input"
+       2
        *ngIf="picker.isShowTopInput">
     <input [placeholder]="picker.sPlaceholder"
            [value]="(picker.selected|date:'medium')"
@@ -54,24 +55,27 @@
       class="owl-dt-container-row"></owl-date-time-timer>
   </div>
 
-  <owl-date-time-calendar
-    (monthSelected)="picker.selectMonth($event)"
-    (selectedChange)="dateSelected($event)"
-    (yearSelected)="picker.selectYear($event)"
-    *ngIf="pickerType === 'both' || pickerType === 'calendar'"
-    [(pickerMoment)]="pickerMoment"
-    [dateFilter]="picker.dateTimeFilter"
-    [firstDayOfWeek]="picker.firstDayOfWeek"
-    [hideOtherMonths]="picker.hideOtherMonths"
-    [isNoMonthSquares]="picker.isNoMonthSquares"
-    [maxDate]="picker.maxDateTime"
-    [minDate]="picker.minDateTime"
-    [selectMode]="picker.selectMode"
-    [selected]="picker.selected"
-    [selecteds]="picker.selecteds"
-    [startView]="picker.startView"
-    class="owl-dt-container-row"></owl-date-time-calendar>
-
+  <div class="owl-wrap-cal">
+    <div class="owl-enter-message"
+         *ngIf="isShowPopup$|async">{{picker.sPressEnterToSubmit}}</div>
+    <owl-date-time-calendar
+      (monthSelected)="picker.selectMonth($event)"
+      (selectedChange)="dateSelected($event)"
+      (yearSelected)="picker.selectYear($event)"
+      *ngIf="pickerType === 'both' || pickerType === 'calendar'"
+      [(pickerMoment)]="pickerMoment"
+      [dateFilter]="picker.dateTimeFilter"
+      [firstDayOfWeek]="picker.firstDayOfWeek"
+      [hideOtherMonths]="picker.hideOtherMonths"
+      [isNoMonthSquares]="picker.isNoMonthSquares"
+      [maxDate]="picker.maxDateTime"
+      [minDate]="picker.minDateTime"
+      [selectMode]="picker.selectMode"
+      [selected]="picker.selected"
+      [selecteds]="picker.selecteds"
+      [startView]="picker.startView"
+      class="owl-dt-container-row"></owl-date-time-calendar>
+  </div>
   <div *ngIf="picker.isInRangeMode"
        class="owl-dt-container-info owl-dt-container-row"
        role="radiogroup">

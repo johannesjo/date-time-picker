@@ -557,7 +557,7 @@ export class OwlMonthViewComponent<T>
     // check if date is not in current month
     const dayValue = daysDiff + 1;
     const out = dayValue < 1 || dayValue > daysInMonth;
-    const cellClass = 'owl-dt-day-' + this.dateTimeAdapter.getDay(date);
+    const cellClass = 'owl-dt-day owl-dt-day-' + this.dateTimeAdapter.getDay(date);
 
     return new CalendarCell(
       dayValue,
