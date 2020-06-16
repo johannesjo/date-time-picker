@@ -20,7 +20,7 @@ import { OwlCalendarComponent } from './calendar.component';
 import { OwlTimerComponent } from './timer.component';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
 import { OwlDateTime, PickerType } from './date-time.class';
-import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { owlDateTimePickerAnimations } from './date-time-picker.animations';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { mapTo, startWith, switchMap } from 'rxjs/operators';
@@ -34,7 +34,8 @@ import { mapTo, startWith, switchMap } from 'rxjs/operators';
   preserveWhitespaces: false,
   animations: [
     owlDateTimePickerAnimations.transformPicker,
-    owlDateTimePickerAnimations.fadeInPicker
+    owlDateTimePickerAnimations.fadeInPicker,
+    owlDateTimePickerAnimations.fade
   ],
   host: {
     '(@transformPicker.done)': 'handleContainerAnimationDone($event)',
@@ -54,15 +55,16 @@ export class OwlDateTimeContainerComponent<T>
   @ViewChild(OwlTimerComponent)
   timer: OwlTimerComponent<T>;
 
-  private _triggerPopup$ = new Subject<any>();
+  private _triggerPopup$ = new Subject<boolean>();
 
   // typing aren't needed since TypeScript will get the type by parsing the code
   isShowPopup$ = this._triggerPopup$.pipe(
-    switchMap(() =>
-      timer(1000).pipe(
+    switchMap((isShow) => isShow
+      ? timer(1000).pipe(
         mapTo(false),
         startWith(true) // until the timer fires, you'll have this value
       )
+      : of(false)
     )
   );
 
@@ -397,86 +399,90 @@ export class OwlDateTimeContainerComponent<T>
       if (tt === this._lastFocusEl) {
         console.log('SUBMIT');
       } else {
-        this._triggerPopup$.next();
+        this._triggerPopup$.next(true);
       }
       this._lastFocusEl = tt;
-    } else if (isButtons) {
-      const t: HTMLButtonElement = tt as HTMLButtonElement;
-      switch (event.keyCode) {
-        case DOWN_ARROW: {
-          if (t.nextSibling) {
-            event.preventDefault();
-            (t.nextSibling as HTMLButtonElement).focus();
-          } else {
-            const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
-            if (todayCell) {
-              event.preventDefault();
-              todayCell.focus();
-            }
-          }
-          break;
-        }
-        case UP_ARROW: {
-          if (t.previousSibling) {
-            event.preventDefault();
-            (t.previousSibling as HTMLButtonElement).focus();
-          }
-          break;
-        }
-        case RIGHT_ARROW: {
-          const timerFirstInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:first-of-type input') as HTMLInputElement;
-          this._lastBtn = t;
-          if (timerFirstInput) {
-            event.preventDefault();
-            timerFirstInput.focus();
-            timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
-          }
-          break;
-        }
-      }
+    } else {
+      this._triggerPopup$.next(false);
 
-    } else if (isTime) {
-      const t: HTMLInputElement = tt as HTMLInputElement;
-      switch (event.keyCode) {
-        case LEFT_ARROW: {
-          const timerFirstInput: HTMLInputElement = mp.querySelector('.owl-dt-timer-input');
-          const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
-          if (t === timerFirstInput) {
-            if (this._lastBtn) {
-              this._lastBtn.focus();
+      if (isButtons) {
+        const t: HTMLButtonElement = tt as HTMLButtonElement;
+        switch (event.keyCode) {
+          case DOWN_ARROW: {
+            if (t.nextSibling) {
+              event.preventDefault();
+              (t.nextSibling as HTMLButtonElement).focus();
             } else {
-              const firstBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item');
-              firstBtn.focus();
+              const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
+              if (todayCell) {
+                event.preventDefault();
+                todayCell.focus();
+              }
             }
-          } else if (t === timerSecondInput) {
-            timerFirstInput.focus();
-            // NOTE: needs timeout to work (probably because of keyboard event being fired on input)
-            setTimeout(() => {
+            break;
+          }
+          case UP_ARROW: {
+            if (t.previousSibling) {
+              event.preventDefault();
+              (t.previousSibling as HTMLButtonElement).focus();
+            }
+            break;
+          }
+          case RIGHT_ARROW: {
+            const timerFirstInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:first-of-type input') as HTMLInputElement;
+            this._lastBtn = t;
+            if (timerFirstInput) {
+              event.preventDefault();
+              timerFirstInput.focus();
               timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
-            });
+            }
+            break;
           }
-          break;
         }
-        case RIGHT_ARROW: {
-          const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
-          if (timerSecondInput) {
-            event.preventDefault();
-            timerSecondInput.focus();
-            timerSecondInput.setSelectionRange(0, timerSecondInput.value.length);
+
+      } else if (isTime) {
+        const t: HTMLInputElement = tt as HTMLInputElement;
+        switch (event.keyCode) {
+          case LEFT_ARROW: {
+            const timerFirstInput: HTMLInputElement = mp.querySelector('.owl-dt-timer-input');
+            const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
+            if (t === timerFirstInput) {
+              if (this._lastBtn) {
+                this._lastBtn.focus();
+              } else {
+                const firstBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item');
+                firstBtn.focus();
+              }
+            } else if (t === timerSecondInput) {
+              timerFirstInput.focus();
+              // NOTE: needs timeout to work (probably because of keyboard event being fired on input)
+              setTimeout(() => {
+                timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
+              });
+            }
+            break;
           }
-          break;
+          case RIGHT_ARROW: {
+            const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
+            if (timerSecondInput) {
+              event.preventDefault();
+              timerSecondInput.focus();
+              timerSecondInput.setSelectionRange(0, timerSecondInput.value.length);
+            }
+            break;
+          }
         }
-      }
-    } else if (isCalendarCell) {
-      const t: HTMLTableCellElement = tt as HTMLTableCellElement;
-      switch (event.keyCode) {
-        case UP_ARROW: {
-          const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
-          if (t === todayCell) {
-            const lastBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item:last-of-type');
-            lastBtn.focus();
+      } else if (isCalendarCell) {
+        const t: HTMLTableCellElement = tt as HTMLTableCellElement;
+        switch (event.keyCode) {
+          case UP_ARROW: {
+            const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
+            if (t === todayCell) {
+              const lastBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item:last-of-type');
+              lastBtn.focus();
+            }
+            break;
           }
-          break;
         }
       }
     }

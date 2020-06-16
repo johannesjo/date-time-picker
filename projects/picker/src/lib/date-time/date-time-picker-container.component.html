@@ -57,6 +57,7 @@
 
   <div class="owl-wrap-cal">
     <div class="owl-enter-message"
+         [@fade]
          *ngIf="isShowPopup$|async">{{picker.sPressEnterToSubmit}}</div>
     <owl-date-time-calendar
       (monthSelected)="picker.selectMonth($event)"
