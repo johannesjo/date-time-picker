@@ -68,8 +68,8 @@ export class OwlDateTimeContainerComponent<T>
     )
   );
 
-  public picker: OwlDateTime<T>;
-  public activeSelectedIndex = 0; // The current active SelectedIndex in range select mode (0: 'from', 1: 'to')
+  picker: OwlDateTime<T>;
+  activeSelectedIndex = 0; // The current active SelectedIndex in range select mode (0: 'from', 1: 'to')
 
   // retain start and end time
   private retainStartTime: T;
@@ -217,7 +217,7 @@ export class OwlDateTimeContainerComponent<T>
     return this.picker.pickerMode === 'inline' ? '' : 'enter';
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     if (this.picker.selectMode === 'range') {
       if (this.picker.selecteds[0]) {
         this.retainStartTime = this.dateTimeAdapter.clone(this.picker.selecteds[0]);
@@ -228,26 +228,26 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  public ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     this.initPicker();
   }
 
-  public ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.focusPicker();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this._subs.unsubscribe();
   }
 
-  public handleContainerAnimationDone(event: AnimationEvent): void {
+  handleContainerAnimationDone(event: AnimationEvent): void {
     const toState = event.toState;
     if (toState === 'enter') {
       this.pickerOpened$.next();
     }
   }
 
-  public dateSelected(date: T): void {
+  dateSelected(date: T): void {
     let result;
 
     if (this.picker.isInSingleMode) {
@@ -288,7 +288,7 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  public timeSelected(time: T): void {
+  timeSelected(time: T): void {
     this.pickerMoment = this.dateTimeAdapter.clone(time);
 
     if (!this.picker.dateTimeChecker(this.pickerMoment)) {
@@ -338,7 +338,7 @@ export class OwlDateTimeContainerComponent<T>
   /**
    * Handle click on cancel button
    */
-  public onCancelClicked(event: any): void {
+  onCancelClicked(event: any): void {
     this.hidePicker$.next(null);
     event.preventDefault();
     return;
@@ -347,7 +347,7 @@ export class OwlDateTimeContainerComponent<T>
   /**
    * Handle click on set button
    */
-  public onSetClicked(event: any): void {
+  onSetClicked(event: any): void {
     if (!this.picker.dateTimeChecker(this.pickerMoment)) {
       this.hidePicker$.next(null);
       event.preventDefault();
@@ -362,7 +362,7 @@ export class OwlDateTimeContainerComponent<T>
   /**
    * Handle click on inform radio group
    */
-  public handleClickOnInfoGroup(event: any, index: number): void {
+  handleClickOnInfoGroup(event: any, index: number): void {
     this.setActiveSelectedIndex(index);
     event.preventDefault();
     event.stopPropagation();
@@ -371,7 +371,7 @@ export class OwlDateTimeContainerComponent<T>
   /**
    * Handle click on inform radio group
    */
-  public handleKeydownOnInfoGroup(
+  handleKeydownOnInfoGroup(
     event: any,
     next: any,
     index: number
@@ -398,7 +398,7 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  public handleKeydown(
+  handleKeydown(
     event: any
   ): void {
     const mp = this.elmRef.nativeElement;
@@ -503,24 +503,24 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  public setToLaterToday() {
+  setToLaterToday() {
     const closestToday = this._getClosestLaterToday();
     this.pickerMoment = closestToday;
     this.dateSelected(closestToday);
   }
 
-  public setToNone() {
+  setToNone() {
     this.picker.select(null);
   }
 
-  public setToTomorrow() {
+  setToTomorrow() {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
     this._updateDateForNextDayOrWeekButtons(tomorrow as any);
   }
 
-  public setToNextWeek() {
+  setToNextWeek() {
     const d = new Date();
     d.setDate(d.getDate() + (7 - d.getDay()) % 7 + 1);
     this._updateDateForNextDayOrWeekButtons(d as any);
