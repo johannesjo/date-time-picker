@@ -31,11 +31,6 @@ export class AppComponent implements AfterViewInit {
   open_once = false;
 
   ngAfterViewInit() {
-    this.inputRef.nativeElement.focus();
-    setTimeout(() => {
-      this.inputRef.nativeElement.focus();
-      this.inputRef.nativeElement.click();
-    }, 100);
   }
 
   clickSchedule(i) {

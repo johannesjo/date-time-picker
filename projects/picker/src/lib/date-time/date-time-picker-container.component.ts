@@ -73,6 +73,7 @@ export class OwlDateTimeContainerComponent<T>
    * highlighted when using keyboard navigation.
    */
   private _clamPickerMoment: T;
+  private _lastBtn: HTMLButtonElement;
 
   constructor(private cdRef: ChangeDetectorRef,
               private elmRef: ElementRef,
@@ -357,6 +358,95 @@ export class OwlDateTimeContainerComponent<T>
 
       default:
         return;
+    }
+  }
+
+  public handleKeydown(
+    event: any
+  ): void {
+    const mp = this.elmRef.nativeElement;
+    const tt: HTMLInputElement | HTMLButtonElement | HTMLTableCellElement = event.target;
+
+    const isButtons = tt.classList.contains('owl-dt-schedule-item');
+    const isTime = tt.classList.contains('owl-dt-timer-input');
+    const isCalendarCell = tt.classList.contains('owl-dt-calendar-cell');
+
+    if (isButtons) {
+      const t: HTMLButtonElement = tt as HTMLButtonElement;
+      switch (event.keyCode) {
+        case DOWN_ARROW: {
+          if (t.nextSibling) {
+            event.preventDefault();
+            (t.nextSibling as HTMLButtonElement).focus();
+          } else {
+            const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
+            if (todayCell) {
+              event.preventDefault();
+              todayCell.focus();
+            }
+          }
+          break;
+        }
+        case UP_ARROW: {
+          if (t.previousSibling) {
+            event.preventDefault();
+            (t.previousSibling as HTMLButtonElement).focus();
+          }
+          break;
+        }
+        case RIGHT_ARROW: {
+          const timerFirstInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:first-of-type input') as HTMLInputElement;
+          this._lastBtn = t;
+          if (timerFirstInput) {
+            event.preventDefault();
+            timerFirstInput.focus();
+            timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
+          }
+          break;
+        }
+      }
+
+    } else if (isTime) {
+      const t: HTMLInputElement = tt as HTMLInputElement;
+      switch (event.keyCode) {
+        case LEFT_ARROW: {
+          const timerFirstInput: HTMLInputElement = mp.querySelector('.owl-dt-timer-input');
+          const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
+          if (timerFirstInput === t) {
+            if (this._lastBtn) {
+              this._lastBtn.focus();
+            } else {
+              const firstBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item');
+              firstBtn.focus();
+            }
+          } else if (timerSecondInput === t) {
+            timerFirstInput.focus();
+            timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
+          }
+          break;
+        }
+        case RIGHT_ARROW: {
+          const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
+          if (timerSecondInput) {
+            event.preventDefault();
+            timerSecondInput.focus();
+            timerSecondInput.setSelectionRange(0, timerSecondInput.value.length);
+          }
+          break;
+        }
+      }
+    } else if (isCalendarCell) {
+      const t: HTMLTableCellElement = tt as HTMLTableCellElement;
+      switch (event.keyCode) {
+        case UP_ARROW: {
+          const todayCell: HTMLTableCellElement = mp.querySelector('.owl-dt-calendar-cell-active');
+          if (t === todayCell) {
+            const lastBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item:last-of-type');
+            lastBtn.focus();
+          }
+          break;
+        }
+      }
     }
   }
 

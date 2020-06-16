@@ -1,5 +1,6 @@
 <div [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
      [cdkTrapFocus]="picker.pickerMode !== 'inline'"
+     (keydown)="handleKeydown($event)"
      class="owl-dt-container-inner">
 
   <div class="owl-top-input"2
