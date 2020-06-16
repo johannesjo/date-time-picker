@@ -441,16 +441,19 @@ export class OwlDateTimeContainerComponent<T>
         case LEFT_ARROW: {
           const timerFirstInput: HTMLInputElement = mp.querySelector('.owl-dt-timer-input');
           const timerSecondInput: HTMLInputElement = mp.querySelector('owl-date-time-timer-box:last-of-type input') as HTMLInputElement;
-          if (timerFirstInput === t) {
+          if (t === timerFirstInput) {
             if (this._lastBtn) {
               this._lastBtn.focus();
             } else {
               const firstBtn: HTMLElement = mp.querySelector('.owl-dt-schedule-item');
               firstBtn.focus();
             }
-          } else if (timerSecondInput === t) {
+          } else if (t === timerSecondInput) {
             timerFirstInput.focus();
-            timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
+            // NOTE: needs timeout to work (probably because of keyboard event being fired on input)
+            setTimeout(() => {
+              timerFirstInput.setSelectionRange(0, timerFirstInput.value.length);
+            });
           }
           break;
         }
