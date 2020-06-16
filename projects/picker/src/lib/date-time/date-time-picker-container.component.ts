@@ -253,7 +253,22 @@ export class OwlDateTimeContainerComponent<T>
     if (this.picker.isInSingleMode) {
       result = this.dateSelectedInSingleMode(date);
       if (result) {
-        this.pickerMoment = result;
+
+        if (this._isUserSetTime()) {
+          this.pickerMoment = result;
+        } else {
+          const split = this.picker.dayStartsAt.split(':');
+          const d = this.dateTimeAdapter.createDate(
+            this.dateTimeAdapter.getYear(result),
+            this.dateTimeAdapter.getMonth(result),
+            this.dateTimeAdapter.getDate(result),
+            +split[0],
+            +split[1],
+            0
+          );
+          this.pickerMoment = d;
+        }
+
         this.picker.select(result);
       } else {
         // we close the picker when result is null and pickerType is calendar.
