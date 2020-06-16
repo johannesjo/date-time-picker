@@ -2,7 +2,7 @@
      [cdkTrapFocus]="picker.pickerMode !== 'inline'"
      class="owl-dt-container-inner">
 
-  <div class="owl-top-input"
+  <div class="owl-top-input"2
        *ngIf="picker.isShowTopInput">
     <input [placeholder]="picker.sPlaceholder"
            [value]="(picker.selected|date:'medium')"
@@ -13,11 +13,11 @@
 
   <div class="owl-header-wrapper">
     <div class="owl-dt-schedule">
-      <button (click)="setToToday()"
+      <button (click)="setToLaterToday()"
               class="owl-dt-schedule-item"
               tabindex="0">
         <div class="owl-dt-schedule-item--icon">🌣</div>
-        <div class="owl-dt-schedule-item--title">{{picker.sToday}}</div>
+        <div class="owl-dt-schedule-item--title">{{picker.sLaterToday}}</div>
       </button>
       <button (click)="setToTomorrow()"
               class="owl-dt-schedule-item"

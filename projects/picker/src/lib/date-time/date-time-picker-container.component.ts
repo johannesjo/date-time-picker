@@ -360,8 +360,10 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  public setToToday() {
-    this.dateSelected(new Date() as any);
+  public setToLaterToday() {
+    const closestToday = this._getClosestLaterToday();
+    this.pickerMoment = closestToday;
+    this.dateSelected(closestToday);
   }
 
   public setToNone() {
@@ -372,13 +374,34 @@ export class OwlDateTimeContainerComponent<T>
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    this._updateDateForButtons(tomorrow as any);
+    this._updateDateForNextDayOrWeekButtons(tomorrow as any);
   }
 
   public setToNextWeek() {
     const d = new Date();
     d.setDate(d.getDate() + (7 - d.getDay()) % 7 + 1);
-    this._updateDateForButtons(d as any);
+    this._updateDateForNextDayOrWeekButtons(d as any);
+  }
+
+  private _getClosestLaterToday(): T {
+    const now = this.dateTimeAdapter.now();
+    const latestDate = this.picker.laterTodaySlots
+      .map(slotStr => {
+        const split = slotStr.split(':');
+        return this.dateTimeAdapter.createDate(
+          this.dateTimeAdapter.getYear(now),
+          this.dateTimeAdapter.getMonth(now),
+          this.dateTimeAdapter.getDate(now),
+          +split[0],
+          +split[1],
+          0
+        );
+      })
+      .find((slotDate: T) => {
+        return (this.dateTimeAdapter.compare(slotDate, now) === 1)
+          && (slotDate as any).getTime() - (now as any).getTime() > this.picker.laterTodayMinMargin;
+      });
+    return latestDate || this.dateTimeAdapter.now();
   }
 
   /**
@@ -551,7 +574,7 @@ export class OwlDateTimeContainerComponent<T>
     }
   }
 
-  private _updateDateForButtons(date: any) {
+  private _updateDateForNextDayOrWeekButtons(date: any) {
     if (this._isUserSetTime()) {
       this.dateSelected(date as any);
     } else {

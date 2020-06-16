@@ -20,10 +20,24 @@ export abstract class OwlDateTime<T> {
   isShowTopInput = false;
 
   @Input()
+  public dayStartsAt = '9:00';
+
+  @Input()
+  public laterTodaySlots = [
+    '15:00',
+    '17:00',
+    '19:00',
+    '21:00',
+  ];
+
+  @Input()
+  public laterTodayMinMargin = 60 * 60 * 1000;
+
+  @Input()
   sPlaceholder = 'Please select a date';
 
   @Input()
-  sToday = 'Today';
+  sLaterToday = 'Later Today';
 
   @Input()
   sTomorrow = 'Tomorrow';
@@ -42,9 +56,6 @@ export abstract class OwlDateTime<T> {
 
   abstract yearSelected: EventEmitter<T>;
   abstract monthSelected: EventEmitter<T>;
-
-  @Input()
-  public dayStartsAt = '9:00';
 
   private readonly _id: string;
 
