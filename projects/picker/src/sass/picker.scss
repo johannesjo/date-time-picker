@@ -730,13 +730,19 @@ $owl-missing: yellowgreen !default;
   opacity: 0.7;
   min-height: 2em;
   color: $owl-text-color-strong;
+  border-left: 4px solid transparent;
 
   @include darkTheme(true) {
     color: $owl-dark-text-color-strong;
   }
 
+  &.isActive {
+    border-color: $owl-accent-color;
+  }
+
   &:focus,
   &:hover {
+    outline: none;
     background: $owl-light-selected-bg;
     opacity: 1;
 

@@ -24,6 +24,7 @@ import { Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { owlDateTimePickerAnimations } from './date-time-picker.animations';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { mapTo, startWith, switchMap } from 'rxjs/operators';
+import { getWeekNumber } from './get-week-number';
 
 @Component({
   exportAs: 'owlDateTimeContainer',
@@ -211,6 +212,34 @@ export class OwlDateTimeContainerComponent<T>
 
   get owlDTContainerAnimation(): any {
     return this.picker.pickerMode === 'inline' ? '' : 'enter';
+  }
+
+  get isToday(): boolean {
+    if (!this.picker.selected) {
+      return false;
+    }
+    const now = this.dateTimeAdapter.now();
+    return this.dateTimeAdapter.isSameDay(this.picker.selected, now);
+  }
+
+  get isTomorrow(): boolean {
+    if (!this.picker.selected) {
+      return false;
+    }
+    const now = this.dateTimeAdapter.now();
+    const tomorrow = this.dateTimeAdapter.addCalendarDays(now, 1);
+    return this.dateTimeAdapter.isSameDay(this.picker.selected, tomorrow);
+  }
+
+  get isNextWeek() {
+    if (!this.picker.selected) {
+      return false;
+    }
+    const now = Date.now();
+    const tSelected = this.dateTimeAdapter.getTime(this.picker.selected);
+    // NOTE: this won't work for december/january, but we're ok with that for now :D
+    const weekDiff = getWeekNumber(tSelected) - getWeekNumber(now);
+    return weekDiff === 1;
   }
 
   ngOnInit() {

@@ -4,7 +4,6 @@
      class="owl-dt-container-inner">
 
   <div *ngIf="picker.isShowTopInput"
-       2
        class="owl-top-input">
     <input [placeholder]="picker.sPlaceholder"
            [value]="(picker.selected|date:'medium')"
@@ -16,18 +15,21 @@
   <div class="owl-header-wrapper">
     <div class="owl-dt-schedule">
       <button (click)="setToLaterToday()"
+              [class.isActive]="isToday"
               class="owl-dt-schedule-item"
               tabindex="0">
         <div class="owl-dt-schedule-item--icon">🌣</div>
         <div class="owl-dt-schedule-item--title">{{picker.sLaterToday}}</div>
       </button>
       <button (click)="setToTomorrow()"
+              [class.isActive]="isTomorrow"
               class="owl-dt-schedule-item"
               tabindex="0">
         <div class="owl-dt-schedule-item--icon">🌣</div>
         <div class="owl-dt-schedule-item--title">{{picker.sTomorrow}}</div>
       </button>
       <button (click)="setToNextWeek()"
+              [class.isActive]="isNextWeek"
               class="owl-dt-schedule-item"
               tabindex="0">
         <div class="owl-dt-schedule-item--icon">🗓</div>
