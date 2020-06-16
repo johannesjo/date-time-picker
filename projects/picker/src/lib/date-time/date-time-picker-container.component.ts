@@ -575,22 +575,22 @@ export class OwlDateTimeContainerComponent<T>
   }
 
   private _updateDateForNextDayOrWeekButtons(date: any) {
-    if (this._isUserSetTime()) {
-      this.dateSelected(date as any);
-    } else {
-      const split = this.picker.dayStartsAt.split(':');
+    // if (this._isUserSetTime()) {
+    //   this.dateSelected(date as any);
+    // } else {
+    const split = this.picker.dayStartsAt.split(':');
 
-      const d = this.dateTimeAdapter.createDate(
-        this.dateTimeAdapter.getYear(date),
-        this.dateTimeAdapter.getMonth(date),
-        this.dateTimeAdapter.getDate(date),
-        +split[0],
-        +split[1],
-        0
-      );
-      this.pickerMoment = d;
-      this.dateSelected(d as any);
-    }
+    const d = this.dateTimeAdapter.createDate(
+      this.dateTimeAdapter.getYear(date),
+      this.dateTimeAdapter.getMonth(date),
+      this.dateTimeAdapter.getDate(date),
+      +split[0],
+      +split[1],
+      0
+    );
+    this.pickerMoment = d;
+    this.dateSelected(d as any);
+    // }
   }
 
   private _isUserSetTime(): boolean {
