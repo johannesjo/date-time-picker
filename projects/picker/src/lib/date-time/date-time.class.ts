@@ -1,7 +1,7 @@
 /**
  * date-time.class
  */
-import { Directive, EventEmitter, Inject, Input, Optional } from '@angular/core';
+import { Directive, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeFormats } from './adapter/date-time-format.class';
@@ -53,6 +53,9 @@ export abstract class OwlDateTime<T> {
 
   @Input()
   sNextWeek = 'Next week';
+
+  @Output()
+  doubleEnter = new EventEmitter<void>();
 
 
   /**

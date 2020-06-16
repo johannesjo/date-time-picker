@@ -397,7 +397,7 @@ export class OwlDateTimeContainerComponent<T>
 
     if (event.keyCode === ENTER && (isButtons || isTime || isCalendarDayCell)) {
       if (tt === this._lastFocusEl) {
-        console.log('SUBMIT');
+        this.picker.doubleEnter.emit();
       } else {
         this._triggerPopup$.next(true);
       }
