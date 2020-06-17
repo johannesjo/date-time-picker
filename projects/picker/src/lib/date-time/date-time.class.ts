@@ -30,6 +30,7 @@ export abstract class OwlDateTime<T> {
 
     @Input()
     laterTodaySlots = [
+        '9:00',
         '15:00',
         '17:00',
         '19:00',
