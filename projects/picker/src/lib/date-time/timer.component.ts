@@ -17,6 +17,7 @@ import {
 import { OwlDateTimeIntl } from './date-time-picker-intl.service';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
 import { take } from 'rxjs/operators';
+import { IS_TOUCH_ONLY } from './is-touch-only';
 
 @Component({
   exportAs: 'owlDateTimeTimer',
@@ -58,6 +59,10 @@ export class OwlTimerComponent<T> implements OnInit {
   stepSecond = 1;
   @Output()
   selectedChange = new EventEmitter<T>();
+  touchTimeValue: string;
+
+  IS_TOUCH_ONLY = IS_TOUCH_ONLY;
+
   private isPM = false; // a flag indicates the current timer moment is in PM or AM
 
   constructor(
@@ -79,8 +84,15 @@ export class OwlTimerComponent<T> implements OnInit {
 
   set pickerMoment(value: T) {
     value = this.dateTimeAdapter.deserialize(value);
-    this._pickerMoment =
-      this.getValidDate(value) || this.dateTimeAdapter.now();
+    this._pickerMoment = this.getValidDate(value) || this.dateTimeAdapter.now();
+    if (IS_TOUCH_ONLY) {
+      const v = new Date(value as any);
+      let hour: string | number = v.getHours();
+      let min: string | number = v.getMinutes();
+      hour = (hour < 10 ? '0' : '') + hour;
+      min = (min < 10 ? '0' : '') + min;
+      this.touchTimeValue = hour + ':' + min;
+    }
   }
 
   /** The minimum selectable date time. */
@@ -188,6 +200,28 @@ export class OwlTimerComponent<T> implements OnInit {
 
   ngOnInit() {
   }
+
+  onTouchTimeChange($event) {
+    const inpDate = $event.target.value as string;
+    if (!inpDate) {
+      return;
+    }
+    const split = inpDate.split(':');
+    const h = +split[0];
+    const m = +split[1];
+    const s = +split[2];
+    const updatedDate = this.dateTimeAdapter.createDate(
+      this.dateTimeAdapter.getYear(this._pickerMoment),
+      this.dateTimeAdapter.getMonth(this._pickerMoment),
+      this.dateTimeAdapter.getDate(this._pickerMoment),
+      h,
+      m,
+      s || 0
+    );
+
+    this.selectedChange.emit(updatedDate);
+  }
+
 
   /**
    * Focus to the host element

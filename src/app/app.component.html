@@ -2,9 +2,11 @@
   <owl-date-time-inline [value]="currentValue"
                         [dayStartsAt]="'9:33'"
                         [min]="now"
+                        (ngModelChange)="onChange($event)"
                         [isNoMonthSquares]="true"
                         [isHandleDoubleEnter]="true"></owl-date-time-inline>
 </div>
+<p>Selected: {{currentValue|date:'short'}}</p>
 
 
 <div style="width: 600px; margin-top: 40px;">

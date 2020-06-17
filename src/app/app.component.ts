@@ -36,4 +36,9 @@ export class AppComponent implements AfterViewInit {
   clickSchedule(i) {
     console.log(i);
   }
+
+  onChange(ev) {
+    // console.log(ev);
+    this.currentValue = ev;
+  }
 }
