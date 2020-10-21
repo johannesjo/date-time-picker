@@ -281,6 +281,7 @@ export class OwlDateTimeContainerComponent<T>
 
         if (this._isUserSetTime()) {
           this.pickerMoment = result;
+          this.picker.select(result);
         } else {
           const split = this.picker.dayStartsAt.split(':');
           const d = this.dateTimeAdapter.createDate(
@@ -292,9 +293,9 @@ export class OwlDateTimeContainerComponent<T>
             0
           );
           this.pickerMoment = d;
+          this.picker.select(d);
         }
 
-        this.picker.select(result);
       } else {
         // we close the picker when result is null and pickerType is calendar.
         if (this.pickerType === 'calendar') {
