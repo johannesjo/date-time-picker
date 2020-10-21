@@ -1,6 +1,6 @@
 {
   "name": "ngx-date-time-picker-schedule",
-  "version": "9.4.9",
+  "version": "9.4.10",
   "description": "Angular Date Time Picker",
   "keywords": [
     "Angular",
@@ -29,7 +29,7 @@
     "build_css_onLinux": "mkdir -p dist/picker/assets/style && node-sass --output-style=compressed projects/picker/src/sass/picker.scss > dist/picker/assets/style/picker.min.css",
     "npm_pack": "cd dist/picker && npm pack",
     "package_windows": "npm run build_lib && npm run build_css_onWindows && npm run npm_pack",
-    "package_linux": "npm run build_lib && npm run build_css_onLinux && npm run npm_pack"
+    "package_linux": "echo 'EXECUTE FROM projects/picker!!' && npm run build_lib && npm run build_css_onLinux && npm run npm_pack"
   },
   "repository": {
     "type": "git",
