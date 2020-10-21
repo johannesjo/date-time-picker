@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 
 import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
@@ -8,7 +8,8 @@ import { OwlDateTimeComponent } from '../../projects/picker/src/public_api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild('date_range_component', { static: true })
@@ -38,7 +39,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   onChange(ev) {
-    // console.log(ev);
+    console.log('onChange', ev);
     this.currentValue = ev;
   }
 }
