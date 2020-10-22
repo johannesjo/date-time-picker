@@ -531,8 +531,10 @@ export class OwlDateTimeContainerComponent<T>
 
   setToLaterToday() {
     const closestToday = this._getClosestLaterToday();
+    this.picker.select(closestToday);
     this.pickerMoment = closestToday;
-    this.dateSelected(closestToday);
+    // NOTE: normally we would call this, but then time setting wouldn't work
+    // this.dateSelected(closestToday);
   }
 
   setToNone() {
