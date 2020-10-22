@@ -30,7 +30,7 @@
     "npm_pack": "cd dist/picker && npm pack",
     "package_windows": "npm run build_lib && npm run build_css_onWindows && npm run npm_pack",
     "package_linux": "echo 'EXECUTE FROM dist/picker!!!!' && npm run build_lib && npm run build_css_onLinux && npm run npm_pack",
-    "pub": "echo 'EXECUTE FROM root!!!!' && npm run package_linux && cd dist/picker && npm publish"
+    "pub": "echo 'EXECUTE FROM root!!!!' && npm run package_linux && cd dist/picker && echo 'NOW EXEC npm publish'"
   },
   "repository": {
     "type": "git",
